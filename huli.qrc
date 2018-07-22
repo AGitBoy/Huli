@@ -1,0 +1,26 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+	<qresource>
+		<file>res/icons/app/internet-web-browser.svg</file>
+	</qresource>
+
+	<qresource>
+		<file>res/icons/actions/arrow-left.svg</file>
+	</qresource>
+
+	<qresource>
+		<file>res/icons/actions/arrow-right.svg</file>
+	</qresource>
+
+	<qresource>
+		<file>res/icons/actions/plus.svg</file>
+	</qresource>
+
+	<qresource>
+		<file>res/icons/actions/refresh.svg</file>
+	</qresource>
+
+	<qresource>
+		<file>res/icons/actions/search.svg</file>
+	</qresource>
+</RCC>
