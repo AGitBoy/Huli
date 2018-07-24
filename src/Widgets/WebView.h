@@ -27,9 +27,12 @@ public slots:
 	void fullScreenRequest(QWebEngineFullScreenRequest request);
 	void loadStartSlot();
 	QWebEngineView* createWindow(QWebEnginePage::WebWindowType type) override;
-
+	void renderProcessTerminatedHandler(QWebEnginePage::RenderProcessTerminationStatus terminationStatus, int statusCode);
+	void contextMenuEvent(QContextMenuEvent* event) override;
+	void openDevTools();
+	
 private slots:
-	void changedSlot(bool ok);
+	void changedSlot(bool);
 };
 
 #endif

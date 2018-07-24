@@ -38,7 +38,7 @@ Window* CLIParser::windowFromArgs(QCommandLineParser* parser) {
 	
 	for(int i = 0; i < parser->unknownOptionNames().length(); ++i) {
 		qWarning() << "Unknown option '" << parser->unknownOptionNames()[i] << "'\n";
-	}
+	} // prints error, then exits.
 	
 	if(args.empty()) {
 		return new Window();

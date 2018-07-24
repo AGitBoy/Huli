@@ -36,6 +36,11 @@ WebView::WebView(Tabs* tab): QWebEngineView() {
 		this, SLOT(fullScreenRequest(QWebEngineFullScreenRequest))
 	);
 	
+	connect(
+		this, &QWebEngineView::renderProcessTerminated,
+		this, &WebView::renderProcessTerminatedHandler
+	);
+	
 	settings()->setAttribute(QWebEngineSettings::FullScreenSupportEnabled, true);
 	exitFullScreen.setShortcut(Qt::Key_Escape);
 	
@@ -48,7 +53,7 @@ WebView::WebView(Tabs* tab): QWebEngineView() {
 	
 }
 
-void WebView::changedSlot(bool ok) {
+void WebView::changedSlot(bool) {
 	setCursor(Qt::ArrowCursor);
 	emit changed(this);
 }
@@ -110,4 +115,72 @@ QWebEngineView* WebView::createWindow(QWebEnginePage::WebWindowType type) {
 	}
 }
 
+void WebView::renderProcessTerminatedHandler(QWebEnginePage::RenderProcessTerminationStatus terminationStatus,
+                                             int statusCode) {
+	QString statusMessage;
+	switch(terminationStatus) {
+		case QWebEnginePage::NormalTerminationStatus:
+			statusMessage = "Render process normal exit";
+			break;
+			
+		case QWebEnginePage::AbnormalTerminationStatus:
+			statusMessage = "Render process abnormal exit";
+			break;
+			
+		case QWebEnginePage::CrashedTerminationStatus:
+			statusMessage = "Render process crash";
+			break;
+			
+		case QWebEnginePage::KilledTerminationStatus:
+			statusMessage = "Render process killed";
+			break;
+	}
+	
+	QMessageBox::StandardButton btn = QMessageBox::question(
+		window(),
+		statusMessage,
+		tr("Render process has crashed with exit code: %1\nReload the page?").arg(statusCode)
+	);
+	
+	if(btn == QMessageBox::Yes) {
+		QTimer::singleShot(0, [this] { reload(); });
+	}
+}
+
+void WebView::contextMenuEvent(QContextMenuEvent* event) {
+	QMenu* menu = page()->createStandardContextMenu();
+	const QList<QAction*> actions = menu->actions();
+	
+	auto inspectElement = std::find(actions.cbegin(), actions.cend(), page()->action(QWebEnginePage::InspectElement));
+	
+	if(inspectElement == actions.cend()) {
+		auto viewSource = std::find(actions.cbegin(), actions.cend(), page()->action(QWebEnginePage::ViewSource));
+		if(viewSource == actions.cend()) {
+			menu->addSeparator();
+		}
+		
+		auto* action = new QAction(menu);
+		action->setText("Open inspector in new window");
+		
+		connect(
+			action, &QAction::triggered,
+			[this](bool) { openDevTools(); }
+		);
+		
+		QAction* before(inspectElement == actions.cend() ? nullptr : *inspectElement);
+		menu->insertAction(before, action);
+	} else {
+		(*inspectElement)->setText(tr("Inspect element"));
+	}
+	menu->popup(event->globalPos());
+}
+
+void WebView::openDevTools() {
+	auto devToolsWindow = new QWebEngineView();
+	devToolsWindow->setAttribute(Qt::WA_DeleteOnClose);
+	
+	page()->setDevToolsPage(devToolsWindow->page());
+	devToolsWindow->show();
+	page()->triggerAction(QWebEnginePage::InspectElement);
+}
 

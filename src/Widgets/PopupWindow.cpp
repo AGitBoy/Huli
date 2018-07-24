@@ -20,7 +20,7 @@ PopupWindow::PopupWindow(QWebEngineProfile* profile)
 	
 	view->settings()->setAttribute(QWebEngineSettings::FullScreenSupportEnabled, true);
 	
-	exitFullScreenAction->setShortcut(Qt::Key_Escape);
+	exitFullScreenAction->setShortcut(Qt::Key_Escape); // Press escape when fullscreen to exit fullscreen
 	exitFullScreenAction->setDisabled(isFullScreen());
 	
 	connect(
@@ -40,7 +40,7 @@ PopupWindow::PopupWindow(QWebEngineProfile* profile)
 	
 	connect(
 		view, &QWebEngineView::urlChanged,
-		[this](const QUrl &url) { urlBar->setText(url.toDisplayString()); }
+		[this](const QUrl &url) { urlBar->setText(url.toDisplayString()); } // Prettify url?
 	);
 	
 	connect(
@@ -62,18 +62,23 @@ PopupWindow::PopupWindow(QWebEngineProfile* profile)
 
 void PopupWindow::fullScreenRequest(QWebEngineFullScreenRequest request) {
 	if(request.toggleOn()) {
+		// Hides urlBar and makes webview fullscreen
+		// Probably not the best way to do this
 		urlBar->hide();
 		view->showFullScreen();
 		showFullScreen();
+		// todo: add fullscreen notification
 		exitFullScreenAction->setDisabled(false);
 	} else {
+		// Returns to normal
 		urlBar->show();
 		showNormal();
 		exitFullScreenAction->setDisabled(true);
 	}
-	request.accept();
+	request.accept(); // Are there any cases in which we want to reject this request? Maybe check for focus?
 }
 
+// I forget what this does and I'm scared to touch it.
 void PopupWindow::handleGeometryChangeRequested(const QRect &newGeometry) {
 	if(QWindow* window = windowHandle()) {
 		setGeometry(newGeometry.marginsRemoved(window->frameMargins()));
