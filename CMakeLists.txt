@@ -60,7 +60,15 @@ add_executable(
 	src/App/CLIParser.h
 	src/Web/WebPage.cpp
 	src/Web/WebPage.h
-)
+	src/Widgets/DownloadManager.cpp
+	src/Widgets/DownloadManager.h
+	src/Widgets/DownloadItem.cpp
+	src/Widgets/DownloadItem.h
+	src/Util/getFilenameFromPath.h
+	src/Util/getFilenameFromPath.cpp
+	src/Widgets/TabBar.cpp
+	src/Widgets/TabBar.h
+	src/Util/fontUtils.cpp src/Util/fontUtils.h)
 
 target_link_libraries(Huli Qt5::Widgets)
 target_link_libraries(Huli Qt5::WebEngineWidgets)

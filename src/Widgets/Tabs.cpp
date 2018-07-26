@@ -2,26 +2,19 @@
 #include "Tabs.h"
 #include "WebPage.h"
 
-Tabs::Tabs(QWebEngineProfile* profile): QTabWidget(), myProfile(profile) {
+Tabs::Tabs(QWebEngineProfile* profile): QTabWidget(), myProfile(profile), tabRow(new TabBar(this)) {
+	setTabBar(tabRow);
+	
 	setElideMode(Qt::ElideRight);
 	setDocumentMode(true);
 	setTabsClosable(true);
-	
-	// Doesn't work with Kvantum styling engine
-	setStyleSheet("QTabBar::tab { width: 150px; }");
 	
 	if(myProfile->isOffTheRecord()) {
 		qDebug() << "Private Browsing Mode On" << "\n";
 	}
 	
-	auto* addTabButton = new QPushButton();
-	addTabButton->setIcon(QIcon::fromTheme("tab-new", QIcon(":/res/icons/actions/plus.svg")));
-	
-	// TODO: Make move next to last tab
-	setCornerWidget(addTabButton);
-	
 	connect(
-		addTabButton, &QPushButton::clicked,
+		tabRow->addTabButton, &QPushButton::clicked,
 		[this](bool) { newTab(); }
 	);
 	
@@ -44,6 +37,11 @@ WebView* Tabs::newTab(QString str) {
 	auto* page = new WebPage(myProfile, view);
 	
 	view->setPage(page);
+	
+	connect(
+		page, SIGNAL(fullScreenRequested(QWebEngineFullScreenRequest)),
+		view, SLOT(fullScreenRequest(QWebEngineFullScreenRequest))
+	);
 	
 	auto* container(new ViewContainer(view));
 	int i = addTab(container, view->title());

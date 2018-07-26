@@ -1,13 +1,11 @@
-#include <iostream>
-#include "src/Widgets/AddressBar.h"
-#include "src/Widgets/AddressBarInput.h"
-#include "src/Widgets/ViewContainer.h"
-#include "src/Util/urlValidation.h"
+#include "AddressBar.h"
+#include "AddressBarInput.h"
+#include "ViewContainer.h"
+#include "urlValidation.h"
 
 AddressBar::AddressBar(ViewContainer* container)
-	: QWidget(), HBox(new QHBoxLayout()), input(new AddressBarInput(this)), view(container) {
+	: QWidget(), HBox(new QHBoxLayout()), input(new AddressBarInput(this)), view(container), manager(new DownloadManager(this)) {
 	setMaximumHeight(200);
-	
 	WebView* webView = view->view;
 	
 	backButton.setIcon(
@@ -29,6 +27,23 @@ AddressBar::AddressBar(ViewContainer* container)
 			"view-refresh",
 			QIcon(":/res/icons/actions/refresh.svg")
 		)
+	);
+	
+	downloadsButton.setIcon(
+		QIcon::fromTheme(
+			"downloads-emblem",
+			QIcon::fromTheme("download")
+		)
+	); // TODO: Add fallback icon
+
+	connect(
+		webView->page()->profile(), &QWebEngineProfile::downloadRequested,
+		manager, &DownloadManager::downloadRequested
+	);
+	
+	connect(
+		&downloadsButton, &QPushButton::clicked,
+		manager, &DownloadManager::toggleHidden
 	);
 	
 	connect(
@@ -65,6 +80,7 @@ AddressBar::AddressBar(ViewContainer* container)
 	HBox->addWidget(&nextButton);
 	HBox->addWidget(&reloadButton);
 	HBox->addWidget(input);
+	HBox->addWidget(&downloadsButton);
 	
 	setLayout(HBox);
 };
@@ -78,7 +94,11 @@ void AddressBar::search() {
 }
 
 void AddressBar::hider(bool on) {
-	on ? hide() : show();
+	if(on) {
+		hide();
+	} else {
+		show();
+	}
 }
 
 void AddressBar::searchForce() {
@@ -97,4 +117,5 @@ void AddressBar::searchFromInput(const QString &query) {
 	} else {
 		view->view->load(search.arg(query));
 	}
+	view->setFocus();
 };

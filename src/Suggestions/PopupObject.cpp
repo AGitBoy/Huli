@@ -61,10 +61,15 @@ bool PopupObject::eventFilter(QObject* obj, QEvent* event) {
 	}
 	
 	if(event->type() == QEvent::MouseButtonPress) {
-		popup->hide();
-		editor->setFocus();
-		editor->bar->search();
-		return true;
+		auto mouseEvent = static_cast<QMouseEvent*>(event); // NOLINT
+		if(popup->rect().contains(mouseEvent->pos())) { // Check if mouse is hovering popup or not
+			popup->hide();
+			editor->setFocus();
+			editor->bar->search();
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	if(event->type() == QEvent::KeyPress) {
@@ -140,7 +145,6 @@ void PopupObject::showCompletion(QVector<suggestion*> choices) {
 			
 			item->setText(1, choices[i]->snippet);
 			item->setToolTip(1, choices[i]->snippet);
-			item->setTextColor(1, editor->palette().color(QPalette::Disabled, QPalette::Text));
 			
 			item->setIcon(0, choices[i]->icon);
 		}

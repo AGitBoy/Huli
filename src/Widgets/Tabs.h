@@ -6,6 +6,7 @@
 
 #include "WebView.h"
 #include "ViewContainer.h"
+#include "TabBar.h"
 
 class Tabs: public QTabWidget {
 Q_OBJECT;
@@ -15,6 +16,7 @@ public:
 	
 	QList<WebView*> tabList;
 	QWebEngineProfile* myProfile;
+	TabBar* tabRow;
 	
 	void updateTabList();
 	WebView* getView(int index);

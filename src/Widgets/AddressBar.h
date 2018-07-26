@@ -4,6 +4,7 @@
 #include <QtWidgets>
 #include <QtWebEngineWidgets>
 #include "WebView.h"
+#include "DownloadManager.h"
 
 class AddressBarInput;
 
@@ -21,7 +22,9 @@ public:
 	QPushButton backButton; // Back navigational button
 	QPushButton nextButton; // Forward navigational button
 	QPushButton reloadButton; // Forward navigation button
-
+	QPushButton downloadsButton;
+	DownloadManager* manager;
+	
 public slots:
 	void urlChange(QUrl url);
 	void search();

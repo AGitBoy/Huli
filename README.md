@@ -8,4 +8,3 @@ display.
 The default fallback icon was made by the Tango desktop project.
 
 Fallback action icons come from [this project](https://materialdesignicons.com/)
-

@@ -41,7 +41,6 @@ WebView::WebView(Tabs* tab): QWebEngineView() {
 		this, &WebView::renderProcessTerminatedHandler
 	);
 	
-	settings()->setAttribute(QWebEngineSettings::FullScreenSupportEnabled, true);
 	exitFullScreen.setShortcut(Qt::Key_Escape);
 	
 	connect(
@@ -52,7 +51,6 @@ WebView::WebView(Tabs* tab): QWebEngineView() {
 	addAction(&exitFullScreen);
 	
 }
-
 void WebView::changedSlot(bool) {
 	setCursor(Qt::ArrowCursor);
 	emit changed(this);
