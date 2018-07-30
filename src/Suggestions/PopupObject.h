@@ -5,6 +5,7 @@
 #include <QtNetwork>
 #include "suggestion.h"
 #include "AbstactSuggestionProvider.h"
+#include "Config.h"
 
 class AddressBarInput;
 

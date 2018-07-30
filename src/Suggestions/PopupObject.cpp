@@ -6,8 +6,7 @@
 #include "AddressBarInput.h"
 #include "AddressBar.h"
 
-PopupObject::PopupObject(AddressBarInput* editor): QObject(editor), editor(editor), provider(
-	new DuckDuckGoProvider) { // TODO: load provider from config file
+PopupObject::PopupObject(AddressBarInput* editor): QObject(editor), editor(editor), provider(Config::getProvider(Config::getCurrentEngine())) {
 	
 	popup = new QTreeWidget;
 	popup->setWindowFlags(Qt::Popup);
@@ -125,8 +124,10 @@ void PopupObject::showCompletion(QVector<suggestion*> choices) {
 	
 	auto SearchSeparatorItem = new QTreeWidgetItem(popup);
 	SearchSeparatorItem->setDisabled(true);
+	
 	SearchSeparatorItem
-		->setText(0, "Search DuckDuckGo"); // TODO: Load search engine name based on current search engine
+		->setText(0, tr("Search %1").arg(Config::getCurrentEngine()->name));
+		
 	auto searchItem = new QTreeWidgetItem(popup);
 	forcedSearchItem = searchItem;
 	searchItem->setText(0, editor->text());
@@ -138,7 +139,7 @@ void PopupObject::showCompletion(QVector<suggestion*> choices) {
 		SuggestionSeparatorItem->setText(0, "Suggestions");
 		
 		// Truncates to 5
-		for(int i = 0; i < choices.length() && i < 5; ++i) { // TODO: Load truncation value from config
+		for(int i = 0; i < choices.length() && i < Config::getSuggestionTruncateLength(); ++i) {
 			auto item = new QTreeWidgetItem(popup);
 			item->setText(0, choices[i]->text);
 			item->setToolTip(0, choices[i]->text);

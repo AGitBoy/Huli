@@ -2,6 +2,7 @@
 #include "AddressBarInput.h"
 #include "ViewContainer.h"
 #include "urlValidation.h"
+#include "Config.h"
 
 AddressBar::AddressBar(ViewContainer* container)
 	: QWidget(), HBox(new QHBoxLayout()), input(new AddressBarInput(this)), view(container), manager(new DownloadManager(this)) {
@@ -106,12 +107,12 @@ void AddressBar::searchForce() {
 }
 
 void AddressBar::searchForce(const QString &query) {
-	QString search = "https://www.duckduckgo.com/?q=%1"; // todo: load from config
+	QString search = Config::getCurrentEngine()->url;
 	view->view->load(search.arg(query));
 }
 
 void AddressBar::searchFromInput(const QString &query) {
-	QString search = "https://www.duckduckgo.com/?q=%1"; // todo: load from config
+	QString search = Config::getCurrentEngine()->url;
 	if(urlValidation(query)) {
 		view->view->load(query);
 	} else {
