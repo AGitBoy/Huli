@@ -68,6 +68,8 @@ bool PopupObject::eventFilter(QObject* obj, QEvent* event) {
 			editor->bar->search();
 			return true;
 		} else {
+			timer.stop();
+			popup->hide();
 			return false;
 		}
 	}
