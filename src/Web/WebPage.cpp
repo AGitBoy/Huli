@@ -54,49 +54,12 @@ void WebPage::registerProtocolHandler(QWebEngineRegisterProtocolHandlerRequest r
 bool WebPage::certificateError(const QWebEngineCertificateError &error) {
 	QWidget* window = view()->window();
 	if(error.isOverridable()) {
-		QDialog certificateDialog(window);
-		certificateDialog.setModal(true);
-		
-		certificateDialog.setWindowTitle("Certificate Error");
-		
-		QGridLayout grid;
-		
-		QLabel iconLabel;
-		QIcon labelIcon = QIcon::fromTheme("security-low"); // todo: add fallback icon
-		iconLabel.setPixmap(labelIcon.pixmap(64));
-		
-		grid.addWidget(&iconLabel, 0, 0);
-		
-		QLabel textLabel;
-		textLabel.setText(error.errorDescription());
-		
-		grid.addWidget(&textLabel, 0, 1);
-		
-		auto* box = new QDialogButtonBox(QDialogButtonBox::Abort | QDialogButtonBox::Ignore, &certificateDialog);
-		
-		QPushButton* AbortButton = box->button(QDialogButtonBox::Abort);
-		AbortButton->setDefault(true);
-		AbortButton->setAutoDefault(true);
-		
-		QPushButton* IgnoreButton = box->button(QDialogButtonBox::Ignore);
-		IgnoreButton->setDefault(false);
-		IgnoreButton->setAutoDefault(false);
-		
-		grid.addWidget(box, 1, 0, 1, 2);
-		
-		connect(
-			box, &QDialogButtonBox::accepted,
-			&certificateDialog, &QDialog::accept
-		);
-		
-		connect(
-			box, &QDialogButtonBox::rejected,
-			&certificateDialog, &QDialog::reject
-		);
-		
-		certificateDialog.setLayout(&grid);
-		
-		return certificateDialog.exec() == QDialog::Accepted;
+		return QMessageBox::warning(
+			window,
+			"Certificate Error",
+			error.errorDescription(),
+			QMessageBox::Abort | QMessageBox::Ignore
+		) == QMessageBox::Ignore;
 	}
 	
 	return false;
