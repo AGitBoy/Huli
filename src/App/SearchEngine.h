@@ -6,8 +6,8 @@
 #include "SuggestionEnum.h"
 
 class SearchEngine: public QObject {
-	Q_OBJECT;
-	
+Q_OBJECT;
+
 public:
 	SearchEngine(QString Name, QString Url, SuggestionEnum Provider);
 	QString name;

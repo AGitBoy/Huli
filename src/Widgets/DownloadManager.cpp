@@ -2,8 +2,9 @@
 #include "AddressBar.h"
 #include "ViewContainer.h"
 
-DownloadManager::DownloadManager(AddressBar* parent): QObject(), widget_parent(parent), mainLayout(nullptr), downloadPanel(
-	nullptr), downloadList({}), bar(parent) {
+DownloadManager::DownloadManager(AddressBar* parent)
+	: QObject(), widget_parent(parent), mainLayout(nullptr), downloadPanel(
+	nullptr), downloadList({ }), bar(parent) {
 }
 
 void DownloadManager::makePanelUi() {
@@ -18,9 +19,9 @@ void DownloadManager::makePanelUi() {
 		auto* downloadWidget = new DownloadItem(i);
 		mainLayout->addWidget(downloadWidget);
 	}
-
+	
 	downloadPanel->setLayout(mainLayout);
-	downloadPanel->move(bar->downloadsButton.x() - downloadPanel->width(), bar->height()*2);
+	downloadPanel->move(bar->downloadsButton.x() - downloadPanel->width(), bar->height() * 2);
 	downloadPanel->show();
 }
 

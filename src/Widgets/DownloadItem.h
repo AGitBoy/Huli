@@ -7,10 +7,10 @@
 #include "fontUtils.h"
 
 class DownloadItem: public QWidget {
-	Q_OBJECT;
-	
+Q_OBJECT;
+
 public:
-	explicit DownloadItem(QWebEngineDownloadItem *item);
+	explicit DownloadItem(QWebEngineDownloadItem* item);
 	QWebEngineDownloadItem* download;
 	QGridLayout* grid;
 	QLabel* iconLabel;
@@ -22,11 +22,11 @@ public:
 	
 	const QIcon pause = QIcon::fromTheme("media-playback-pause"); // TODO: add fallback icon
 	const QIcon unpause = QIcon::fromTheme("media-playback-start"); // TODO: add fallback icon
-	
+
 private:
 	void updatePauseIcon();
 	void setStatusText(const QString &text);
-	
+
 public slots:
 	void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 	void finished();

@@ -11,7 +11,7 @@ PopupWindow::PopupWindow(QWebEngineProfile* profile)
 	layout->setContentsMargins(0, 0, 0, 0);
 	layout->addWidget(urlBar);
 	layout->addWidget(view);
-
+	
 	urlBar->setReadOnly(true);
 	urlBar->addAction(favicon, QLineEdit::LeadingPosition);
 	

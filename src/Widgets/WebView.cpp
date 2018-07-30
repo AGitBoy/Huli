@@ -51,6 +51,7 @@ WebView::WebView(Tabs* tab): QWebEngineView() {
 	addAction(&exitFullScreen);
 	
 }
+
 void WebView::changedSlot(bool) {
 	setCursor(Qt::ArrowCursor);
 	emit changed(this);
@@ -120,15 +121,15 @@ void WebView::renderProcessTerminatedHandler(QWebEnginePage::RenderProcessTermin
 		case QWebEnginePage::NormalTerminationStatus:
 			statusMessage = "Render process normal exit";
 			break;
-			
+		
 		case QWebEnginePage::AbnormalTerminationStatus:
 			statusMessage = "Render process abnormal exit";
 			break;
-			
+		
 		case QWebEnginePage::CrashedTerminationStatus:
 			statusMessage = "Render process crash";
 			break;
-			
+		
 		case QWebEnginePage::KilledTerminationStatus:
 			statusMessage = "Render process killed";
 			break;

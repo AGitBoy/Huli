@@ -10,7 +10,7 @@ WebPage::WebPage(QWebEngineProfile* profile, QObject* parent): QWebEnginePage(pr
 		this, &QWebEnginePage::proxyAuthenticationRequired,
 		this, &WebPage::authenticationRequiredProxyHandler
 	);
-
+	
 	connect(
 		this, &QWebEnginePage::registerProtocolHandlerRequested,
 		this, &WebPage::registerProtocolHandler
@@ -30,7 +30,8 @@ void WebPage::authenticationRequiredHandler(const QUrl &srcUrl, QAuthenticator* 
 	makeDialog(authenticator, labelText);
 }
 
-void WebPage::authenticationRequiredProxyHandler(const QUrl &srcUrl, QAuthenticator* authenticator, const QString &proxyHost) {
+void WebPage::authenticationRequiredProxyHandler(const QUrl &srcUrl, QAuthenticator* authenticator,
+                                                 const QString &proxyHost) {
 	QString labelText(QString("Connect to proxy \"%1\" using: ").arg(proxyHost));
 	
 	makeDialog(authenticator, labelText);
@@ -135,12 +136,12 @@ void WebPage::makeDialog(QAuthenticator* authenticator, const QString &labelText
 	grid->addWidget(&passwordInput, 2, 1);
 	
 	
-	QDialogButtonBox *box = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, &authDialog);
+	QDialogButtonBox* box = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, &authDialog);
 	
 	connect(box, &QDialogButtonBox::accepted, &authDialog, &QDialog::accept);
 	connect(box, &QDialogButtonBox::rejected, &authDialog, &QDialog::reject);
 	
-	auto*vBox(new QVBoxLayout());
+	auto* vBox(new QVBoxLayout());
 	vBox->addLayout(grid);
 	vBox->addWidget(box);
 	

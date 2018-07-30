@@ -38,7 +38,7 @@ void TabBar::tabLayoutChange() {
 
 QSize TabBar::sizeHint() const {
 	QSize sizeH = QTabBar::sizeHint();
-	return { sizeH.width()+25, sizeH.height() };
+	return { sizeH.width() + 25, sizeH.height() };
 }
 
 int TabBar::getTabLength() const {

@@ -2,8 +2,8 @@
 
 QMap<QString, SearchEngine*> Config::getEngines() {
 	QMap<QString, SearchEngine*> returnList = {
-		{ "DuckDuckGo", new SearchEngine("DuckDuckGo", "https://www.duckduckgo.com/?q=%1", DuckDuckGo)},
-		{ "Google", new SearchEngine("Google", "https://www.google.com/search?q=%1", Google) }
+		{ "DuckDuckGo", new SearchEngine("DuckDuckGo", "https://www.duckduckgo.com/?q=%1", DuckDuckGo) },
+		{ "Google",     new SearchEngine("Google", "https://www.google.com/search?q=%1", Google) }
 	};
 	
 	QSettings settings("com.agitboy", "Huli");

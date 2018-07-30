@@ -18,7 +18,7 @@ public:
 	~PopupObject() override;
 	
 	AbstractSuggestionProvider* provider; // Abstract class providing search suggestions
-
+	
 	bool eventFilter(QObject* obj, QEvent* event) override;
 	void showCompletion(QVector<suggestion*> choices); // Shows the popup of completions
 

@@ -101,27 +101,27 @@ void DownloadItem::isPausedChanged(bool isPaused) {
 
 void DownloadItem::stateChanged(QWebEngineDownloadItem::DownloadState state) {
 	switch(state) {
-		case(QWebEngineDownloadItem::DownloadRequested):
+		case (QWebEngineDownloadItem::DownloadRequested):
 			break;
-		case(QWebEngineDownloadItem::DownloadInProgress):
+		case (QWebEngineDownloadItem::DownloadInProgress):
 			pauseButton->setDisabled(false);
 			cancelButton->setDisabled(false);
 			progressBar->setHidden(false);
 			setStatusText(tr("In Progress"));
 			break;
-		case(QWebEngineDownloadItem::DownloadCompleted):
+		case (QWebEngineDownloadItem::DownloadCompleted):
 			pauseButton->setDisabled(true);
 			cancelButton->setDisabled(true);
 			progressBar->setHidden(true);
 			setStatusText("Complete");
 			break;
-		case(QWebEngineDownloadItem::DownloadCancelled):
+		case (QWebEngineDownloadItem::DownloadCancelled):
 			pauseButton->setDisabled(true);
 			cancelButton->setDisabled(true);
 			progressBar->setHidden(true);
 			setStatusText(tr("Canceled"));
 			break;
-		case(QWebEngineDownloadItem::DownloadInterrupted):
+		case (QWebEngineDownloadItem::DownloadInterrupted):
 			pauseButton->setDisabled(true);
 			cancelButton->setDisabled(true);
 			progressBar->setHidden(true);

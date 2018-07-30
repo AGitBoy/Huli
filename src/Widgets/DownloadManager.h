@@ -9,7 +9,7 @@
 class AddressBar;
 
 class DownloadManager: public QObject {
-	Q_OBJECT;
+Q_OBJECT;
 
 public:
 	explicit DownloadManager(AddressBar* parent = nullptr);
@@ -18,9 +18,9 @@ public:
 	QWidget* downloadPanel;
 	AddressBar* bar;
 	QList<QWebEngineDownloadItem*> downloadList;
-	
+
 public slots:
-	void downloadRequested(QWebEngineDownloadItem *download);
+	void downloadRequested(QWebEngineDownloadItem* download);
 	void toggleHidden();
 	void makePanelUi();
 
@@ -32,7 +32,7 @@ private:
 		
 		// OS X Applications
 		"application/x-apple-diskimage",
-        "application/x-xar",
+		"application/x-xar",
 		
 		// Debian Based Linux Distros
 		"application/vnd.debian.binary-package",
@@ -52,11 +52,11 @@ private:
 		"application/vnd.flatpak.ref",
 		"application/vnd.flatpak.repo",
 		
-        // OpenSUSE One Click Install
+		// OpenSUSE One Click Install
 		"application/x-suse-ymp",
-  
-        // Java Executables
-        "application/x-java-archive"
+		
+		// Java Executables
+		"application/x-java-archive"
 	};
 };
 

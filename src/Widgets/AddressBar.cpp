@@ -5,7 +5,8 @@
 #include "Config.h"
 
 AddressBar::AddressBar(ViewContainer* container)
-	: QWidget(), HBox(new QHBoxLayout()), input(new AddressBarInput(this)), view(container), manager(new DownloadManager(this)) {
+	: QWidget(), HBox(new QHBoxLayout()), input(new AddressBarInput(this)), view(container),
+	  manager(new DownloadManager(this)) {
 	setMaximumHeight(200);
 	WebView* webView = view->view;
 	
@@ -36,7 +37,7 @@ AddressBar::AddressBar(ViewContainer* container)
 			QIcon::fromTheme("download")
 		)
 	); // TODO: Add fallback icon
-
+	
 	connect(
 		webView->page()->profile(), &QWebEngineProfile::downloadRequested,
 		manager, &DownloadManager::downloadRequested

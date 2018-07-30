@@ -24,7 +24,7 @@ public:
 	QPushButton reloadButton; // Forward navigation button
 	QPushButton downloadsButton;
 	DownloadManager* manager;
-	
+
 public slots:
 	void urlChange(QUrl url);
 	void search();

@@ -6,7 +6,8 @@
 #include "AddressBarInput.h"
 #include "AddressBar.h"
 
-PopupObject::PopupObject(AddressBarInput* editor): QObject(editor), editor(editor), provider(Config::getProvider(Config::getCurrentEngine())) {
+PopupObject::PopupObject(AddressBarInput* editor): QObject(editor), editor(editor),
+                                                   provider(Config::getProvider(Config::getCurrentEngine())) {
 	
 	popup = new QTreeWidget;
 	popup->setWindowFlags(Qt::Popup);
@@ -127,7 +128,7 @@ void PopupObject::showCompletion(QVector<suggestion*> choices) {
 	
 	SearchSeparatorItem
 		->setText(0, tr("Search %1").arg(Config::getCurrentEngine()->name));
-		
+	
 	auto searchItem = new QTreeWidgetItem(popup);
 	forcedSearchItem = searchItem;
 	searchItem->setText(0, editor->text());
