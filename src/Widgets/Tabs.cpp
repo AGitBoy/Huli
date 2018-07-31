@@ -33,15 +33,7 @@ Tabs::Tabs(QWebEngineProfile* profile): QTabWidget(), myProfile(profile), tabRow
 
 
 WebView* Tabs::newTab(QString str) {
-	auto* view(new WebView(this));
-	auto* page = new WebPage(myProfile, view);
-	
-	view->setPage(page);
-	
-	connect(
-		page, SIGNAL(fullScreenRequested(QWebEngineFullScreenRequest)),
-		view, SLOT(fullScreenRequest(QWebEngineFullScreenRequest))
-	);
+	auto* view(new WebView(this, myProfile));
 	
 	auto* container(new ViewContainer(view));
 	int i = addTab(container, view->title());

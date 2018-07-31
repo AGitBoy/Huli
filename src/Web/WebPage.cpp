@@ -16,7 +16,6 @@ WebPage::WebPage(QWebEngineProfile* profile, QObject* parent): QWebEnginePage(pr
 		this, &WebPage::registerProtocolHandler
 	);
 	
-	settings()->setAttribute(QWebEngineSettings::FullScreenSupportEnabled, true);
 }
 
 void WebPage::authenticationRequiredHandler(const QUrl &srcUrl, QAuthenticator* authenticator) {

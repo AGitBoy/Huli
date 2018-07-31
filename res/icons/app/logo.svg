@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="huli-logo.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="726.29921"
+     inkscape:cy="670"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:measure-start="248.571,625.714"
+     inkscape:measure-end="255.141,934.691"
+     inkscape:snap-global="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:window-width="1366"
+     inkscape:window-height="702"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g3751"
+       style="fill:#9C27B0">
+      <rect
+         style="stroke-width:0.30066416;fill:#9C27B0"
+         y="49.848206"
+         x="31.44643"
+         height="197.30359"
+         width="35.142719"
+         id="rect3734" />
+      <rect
+         style="stroke-width:0.25120491;fill:#9C27B0"
+         y="133.75893"
+         x="60.706547"
+         height="29.482143"
+         width="88.586906"
+         id="rect3736" />
+      <rect
+         style="stroke-width:0.26512223;fill:#9C27B0"
+         y="49.470245"
+         x="144.01071"
+         height="198.05951"
+         width="35.142719"
+         id="rect3738" />
+    </g>
+    <path
+       style="fill:#9c27b0;stroke-width:0.26458332"
+       id="path4577"
+       sodipodi:type="arc"
+       sodipodi:cx="66.589149"
+       sodipodi:cy="247.15179"
+       sodipodi:rx="34.839001"
+       sodipodi:ry="19.610001"
+       sodipodi:start="1.5707963"
+       sodipodi:end="3.7024051"
+       d="m 66.58915,266.7618 a 34.839001,19.610001 0 0 1 -30.49034,-10.12268 34.839001,19.610001 0 0 1 0.987863,-19.91738 l 29.502476,10.43005 z" />
+    <path
+       style="fill:#9c27b0;stroke-width:0.26458332"
+       id="path4606"
+       sodipodi:type="arc"
+       sodipodi:cx="66.589149"
+       sodipodi:cy="49.848206"
+       sodipodi:rx="34.839001"
+       sodipodi:ry="19.610001"
+       sodipodi:start="2.646699"
+       sodipodi:end="4.712389"
+       d="M 35.930159,59.161741 A 34.839001,19.610001 0 0 1 36.670803,39.800477 34.839001,19.610001 0 0 1 66.58915,30.238205 l -10e-7,19.610001 z" />
+    <path
+       style="fill:#9c27b0;stroke-width:0.26458332"
+       id="path4610"
+       sodipodi:type="arc"
+       sodipodi:cx="144.01071"
+       sodipodi:cy="49.470245"
+       sodipodi:rx="34.839001"
+       sodipodi:ry="19.610001"
+       sodipodi:start="4.712389"
+       sodipodi:end="0.62157049"
+       d="m 144.01071,29.860245 a 34.839001,19.610001 0 0 1 30.98824,10.648344 34.839001,19.610001 0 0 1 -2.66535,20.380807 L 144.01071,49.470245 Z" />
+    <path
+       style="fill:#9c27b0;stroke-width:0.26458332"
+       id="path4617"
+       sodipodi:type="arc"
+       sodipodi:cx="144.01071"
+       sodipodi:cy="247.52975"
+       sodipodi:rx="34.839001"
+       sodipodi:ry="19.610001"
+       sodipodi:start="5.2945807"
+       sodipodi:end="1.5707963"
+       d="m 163.16714,231.15031 a 34.839001,19.610001 0 0 1 14.21689,22.00756 34.839001,19.610001 0 0 1 -33.37332,13.98189 l 0,-19.61001 z" />
+  </g>
+</svg>

@@ -1,7 +1,7 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
 	<qresource>
-		<file>res/icons/app/internet-web-browser.svg</file>
+		<file>res/icons/app/logo.svg</file>
 	</qresource>
 
 	<qresource>

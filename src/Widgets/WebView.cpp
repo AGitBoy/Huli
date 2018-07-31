@@ -3,8 +3,17 @@
 #include "Window.h"
 #include "PopupWindow.h"
 
-WebView::WebView(Tabs* tab): QWebEngineView() {
+WebView::WebView(Tabs* tab, QWebEngineProfile* profile): QWebEngineView() {
 	tabs = tab;
+	webPage = new WebPage(profile, this);
+	setPage(webPage);
+	
+	connect(
+		webPage, SIGNAL(fullScreenRequested(QWebEngineFullScreenRequest)),
+		this, SLOT(fullScreenRequest(QWebEngineFullScreenRequest))
+	);
+	
+	webPage->settings()->setAttribute(QWebEngineSettings::FullScreenSupportEnabled, true);
 	
 	connect(
 		this, &QWebEngineView::loadFinished,
@@ -64,6 +73,7 @@ void WebView::loadStartSlot() {
 void WebView::fullScreenRequest(QWebEngineFullScreenRequest request) {
 	emit fullScreenRequested(request.toggleOn());
 	if(request.toggleOn()) {
+		windowGeometry = window()->geometry();
 		tabs->hideTabBar(true);
 		exitFullScreen.setDisabled(false);
 		showFullScreen();
@@ -73,6 +83,7 @@ void WebView::fullScreenRequest(QWebEngineFullScreenRequest request) {
 		tabs->hideTabBar(false);
 		showNormal();
 		window()->showNormal();
+		window()->setGeometry(windowGeometry);
 		exitFullScreen.setDisabled(true);
 		fullScreen = false;
 	}

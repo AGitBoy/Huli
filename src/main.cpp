@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
 	QApplication::setWindowIcon(
 		QIcon::fromTheme(
 			"internet-web-browser",
-			QIcon(":/res/icons/app/internet-web-browser.svg")
+			QIcon(":/res/icons/app/logo.svg")
 		)
 	);
 	
