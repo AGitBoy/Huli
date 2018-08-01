@@ -22,7 +22,7 @@ void TabBar::moveAddTabButton() {
 	if(tabSize <= w) {
 		addTabButton->move(tabSize, h);
 	} else {
-		addTabButton->move(w - 57, h);
+		addTabButton->move(w - addTabButton->width(), h);
 	}
 }
 
@@ -38,14 +38,14 @@ void TabBar::tabLayoutChange() {
 
 QSize TabBar::sizeHint() const {
 	QSize sizeH = QTabBar::sizeHint();
-	return { sizeH.width() + 25, sizeH.height() };
+	return { sizeH.width() + addTabButton->width(), sizeH.height() };
 }
 
 int TabBar::getTabLength() const {
 	if(getTabBarMaxLength() <= width()) {
 		return maxTabLength;
 	} else {
-		return (width() / count()) - 25;
+		return ((width() - addTabButton->width()) / count());
 	}
 }
 

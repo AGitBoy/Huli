@@ -92,8 +92,15 @@ void Tabs::viewIconUpdate(QIcon icon) {
 }
 
 void Tabs::updateWindowTitle() {
-	QString fmtStr = myProfile->isOffTheRecord() ? "%1 - Huli <Private Browsing>" : "%1 - Huli";
-	window()->setWindowTitle(QString(fmtStr).arg(getView(currentIndex())->title()));
+	QString title = myProfile->isOffTheRecord() ? QString("Huli <%1>").arg(tr("Private Browsing")) : "Huli";
+	
+	if(getView(currentIndex())->title().isEmpty() || getView(currentIndex())->title().isNull()) {
+		window()->setWindowTitle(title);
+	} else {
+		auto fmtStr = QString("%1 - %2");
+		window()->setWindowTitle(fmtStr.arg(getView(currentIndex())->title(), title));
+	}
+	
 }
 
 int Tabs::indexOfWebView(WebView* w) {
