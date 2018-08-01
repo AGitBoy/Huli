@@ -7,6 +7,7 @@
 #include "WebView.h"
 #include "ViewContainer.h"
 #include "TabBar.h"
+#include "Config.h"
 
 class Tabs: public QTabWidget {
 Q_OBJECT;
@@ -14,22 +15,27 @@ Q_OBJECT;
 public:
 	explicit Tabs(QWebEngineProfile* profile = QWebEngineProfile::defaultProfile());
 	
-	QList<WebView*> tabList;
 	QWebEngineProfile* myProfile;
 	TabBar* tabRow;
 	
-	void updateTabList();
 	WebView* getView(int index);
+	int indexOfWebView(WebView* w);
 
 private:
+	void updateWindowTitle();
+	WebView* makeTab(QString input);
 	WebView* previous = nullptr;
+	WebView* getWebViewFromSender(QObject* senderObj);
 
 public slots:
-	WebView* newTab(QString str = "https://start.duckduckgo.com/");
-	void updateTab(WebView* view);
+	WebView* newTab(QString str = Config::getNewTabPage());
+	WebView* newBackgroundTab(QString str = Config::getNewTabPage());
 	void hideTabBar(bool on);
 	void removeTabRequest(int index);
 	void changedHandler(int index);
+	void fullScreenRequest(bool on);
+	void viewTitleUpdate(QString title);
+	void viewIconUpdate(QIcon icon);
 };
 
 #endif

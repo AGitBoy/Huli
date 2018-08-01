@@ -31,43 +31,19 @@ Tabs::Tabs(QWebEngineProfile* profile): QTabWidget(), myProfile(profile), tabRow
 	previous = newTab();
 };
 
+WebView* Tabs::getWebViewFromSender(QObject* senderObj) {
+	return dynamic_cast<WebView*>(senderObj);
+}
+
+void Tabs::fullScreenRequest(bool on) {
+	hideTabBar(on);
+}
 
 WebView* Tabs::newTab(QString str) {
-	auto* view(new WebView(this, myProfile));
-	
-	auto* container(new ViewContainer(view));
-	int i = addTab(container, view->title());
-	
-	view->index = i;
-	tabList.append(view);
-	updateTabList();
-	
-	view->load(QUrl(str));
-	setCurrentIndex(view->index);
-	
+	WebView* view = makeTab(str);
+	setCurrentWidget(view);
 	return view;
-};;
-
-void Tabs::updateTabList() {
-	for(auto i = 0; i < tabList.length(); i++) {
-		if(tabList[i]->index != i) {
-			tabList[i]->index = i;
-		};
-	};
 };
-
-void Tabs::updateTab(WebView* view) {
-	setTabText(view->index, view->title());
-	setTabIcon(view->index, view->icon());
-	setTabToolTip(view->index, view->title());
-	
-	updateTabList();
-	
-	if(view->index == currentIndex()) {
-		QString fmtStr = myProfile->isOffTheRecord() ? "%1 - Huli <Private Browsing>" : "%1 - Huli";
-		window()->setWindowTitle(QString(fmtStr).arg(view->title()));
-	};
-}
 
 void Tabs::hideTabBar(bool on) {
 	on ? tabBar()->hide() : tabBar()->show();
@@ -79,8 +55,6 @@ void Tabs::removeTabRequest(int index) {
 		if(index == currentIndex()) {
 			setCurrentIndex(0);
 		}
-		tabList.removeAt(index);
-		updateTabList();
 	} else {
 		window()->close();
 	}
@@ -91,7 +65,7 @@ void Tabs::changedHandler(int index) {
 		if(previous != nullptr && previous->fullScreen) {
 			previous->triggerPageAction(QWebEnginePage::ExitFullScreen);
 		}
-		window()->setWindowTitle(QString("%1 - Huli").arg(tabText(index)));
+		updateWindowTitle();
 		previous = getView(index);
 	}
 }
@@ -104,3 +78,59 @@ WebView* Tabs::getView(int index) {
 	#pragma clang diagnostic pop
 }
 
+void Tabs::viewTitleUpdate(QString title) {
+	int index = indexOfWebView(getWebViewFromSender(sender()));
+	setTabText(index, title);
+	
+	updateWindowTitle();
+}
+
+void Tabs::viewIconUpdate(QIcon icon) {
+	int index = indexOfWebView(getWebViewFromSender(sender()));
+	
+	setTabIcon(index, icon);
+}
+
+void Tabs::updateWindowTitle() {
+	QString fmtStr = myProfile->isOffTheRecord() ? "%1 - Huli <Private Browsing>" : "%1 - Huli";
+	window()->setWindowTitle(QString(fmtStr).arg(getView(currentIndex())->title()));
+}
+
+int Tabs::indexOfWebView(WebView* w) {
+	for(int i = 0; i < count(); ++i) {
+		if(w == dynamic_cast<ViewContainer*>(widget(i))->view) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+WebView* Tabs::makeTab(QString input) {
+	auto* view(new WebView(myProfile));
+	
+	auto* container(new ViewContainer(view));
+	int i = addTab(container, view->title());
+	
+	view->load(QUrl(input));
+	
+	connect(
+		view, &QWebEngineView::titleChanged,
+		this, &Tabs::viewTitleUpdate
+	);
+	
+	connect(
+		view, &QWebEngineView::iconChanged,
+		this, &Tabs::viewIconUpdate
+	);
+	
+	connect(
+		view, &BrowserBase::fullScreenRequested,
+		this, &Tabs::fullScreenRequest
+	);
+	
+	return view;
+}
+
+WebView* Tabs::newBackgroundTab(QString str) {
+	return makeTab(str);
+}

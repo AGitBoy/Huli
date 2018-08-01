@@ -22,7 +22,6 @@ int main(int argc, char* argv[]) {
 	);
 	
 	mainWindow->setWindowTitle("Huli");
-	mainWindow->show();
-	
+	mainWindow->showMaximized();
 	return QApplication::exec();
 }

@@ -4,40 +4,21 @@
 #include <QtCore>
 #include <QtWebEngineWidgets>
 #include "WebPage.h"
+#include "BrowserBase.h"
 
-class Tabs;
-
-class WebView: public QWebEngineView {
+// Main Web Browser Tabs
+class WebView: public BrowserBase {
 Q_OBJECT;
 
 public:
-	explicit WebView(Tabs* tab, QWebEngineProfile* profile);
-	
-	Tabs* tabs;
-	
-	int index;
-	bool fullScreen = false;
-	QAction exitFullScreen;
-	WebPage *webPage;
-	
-signals:
-	void fullScreenRequested(bool on);
-	void changed(WebView* view);
+	explicit WebView(QWebEngineProfile* profile);
 
 public slots:
-	void fullScreenRequest(QWebEngineFullScreenRequest request);
-	void loadStartSlot();
-	QWebEngineView* createWindow(QWebEnginePage::WebWindowType type) override;
-	void
-	renderProcessTerminatedHandler(QWebEnginePage::RenderProcessTerminationStatus terminationStatus, int statusCode);
 	void contextMenuEvent(QContextMenuEvent* event) override;
-	void openDevTools();
-
-private slots:
-	void changedSlot(bool);
 
 private:
-	QRect windowGeometry;
+	QWebEngineView* newTab() override;
+	QWebEngineView* newBackgroundTab() override;
 };
 
 #endif
