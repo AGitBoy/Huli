@@ -21,7 +21,16 @@ void DownloadManager::makePanelUi() {
 	}
 	
 	downloadPanel->setLayout(mainLayout);
-	downloadPanel->move(bar->downloadsButton.x() - downloadPanel->width(), bar->height() * 2);
+
+	downloadPanel->move(
+		bar->downloadsButton.mapToGlobal(
+			QPoint(
+				0 - downloadPanel->width(),
+				bar->downloadsButton.height()
+			)
+		)
+	);
+	
 	downloadPanel->show();
 }
 
