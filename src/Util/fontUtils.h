@@ -4,10 +4,9 @@
 #include <QtWidgets>
 
 // Various utilities for manipulating rich text
-class fontUtils {
-public:
-	static QString setTextColor(QString text, QColor color);
-	static QString bold(QString text);
+namespace fontUtils {
+	QString setTextColor(QString text, QColor color);
+	QString bold(QString text);
 };
 
 

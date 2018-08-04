@@ -4,10 +4,7 @@
 WebView::WebView(QWebEngineProfile* profile): BrowserBase(profile) { }
 
 QWebEngineView* WebView::newTab() {
-	#pragma clang diagnostic push
-	#pragma clang diagnostic ignored "-Wincompatible-pointer-types"
 	Window* mainWindow = qobject_cast<Window*>(window()); // NOLINT
-	#pragma clang diagnostic pop
 	if(!mainWindow) {
 		return nullptr;
 	}
@@ -15,10 +12,7 @@ QWebEngineView* WebView::newTab() {
 }
 
 QWebEngineView* WebView::newBackgroundTab() {
-	#pragma clang diagnostic push
-	#pragma clang diagnostic ignored "-Wincompatible-pointer-types"
 	Window* mainWindow = qobject_cast<Window*>(window()); // NOLINT
-	#pragma clang diagnostic pop
 	if(!mainWindow) {
 		return nullptr;
 	}

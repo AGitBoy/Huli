@@ -25,15 +25,15 @@ public slots:
 	void makePanelUi();
 
 private:
-	const QStringList possiblyHarmfulFileTypes = {
+	const QStringList possiblyHarmfulFileTypes = { // Possibly make based on platform?
 		// Windows executables
 		"application/x-ms-dos-executable",
 		"application/x-msi",
-		
+
 		// OS X Applications
 		"application/x-apple-diskimage",
 		"application/x-xar",
-		
+
 		// Debian Based Linux Distros
 		"application/vnd.debian.binary-package",
 		
@@ -54,7 +54,7 @@ private:
 		
 		// OpenSUSE One Click Install
 		"application/x-suse-ymp",
-		
+
 		// Java Executables
 		"application/x-java-archive"
 	};

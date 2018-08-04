@@ -16,8 +16,16 @@ QVector<suggestion*> GoogleProvider::getSuggestions(QNetworkReply* reply) {
 		while(!xml.atEnd()) {
 			xml.readNext();
 			if(xml.tokenType() == QXmlStreamReader::StartElement && xml.name() == "suggestion") {
-				suggestion* choice = new suggestion(xml.attributes().value("data").toString());
-				suggestionList.append(choice);
+				suggestion choice;
+				
+				choice.text = xml.attributes().value("data").toString();
+				
+				choice.icon = QIcon::fromTheme(
+					"search",
+					QIcon(":/res/icons/actions/search.svg")
+				); // Icon to display
+				
+				suggestionList.append(&choice);
 			}
 		}
 	}

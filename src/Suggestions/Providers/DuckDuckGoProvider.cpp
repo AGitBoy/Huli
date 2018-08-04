@@ -13,19 +13,31 @@ QVector<suggestion*> DuckDuckGoProvider::getSuggestions(QNetworkReply* reply) {
 		QJsonDocument doc = QJsonDocument::fromJson(replyData, &error);
 		
 		// Parse JSON
-		if(error.error == QJsonParseError::NoError && doc.isArray()) {
-			QJsonArray array = doc.array();
-			
-			for(auto &&i : array) {
-				if(i.isObject()) {
-					QJsonObject object = i.toObject();
-					suggestion* suggest = new suggestion(object.value("phrase").toString());
-					if(object.contains("snippet")) {
-						suggest->snippet = object.value("snippet").toString();
+		if(error.error == QJsonParseError::NoError) {
+			if(doc.isArray()) {
+				QJsonArray array = doc.array();
+				
+				for(auto &&i : array) {
+					if(i.isObject()) {
+						QJsonObject object = i.toObject();
+						suggestion suggest;
+						
+						suggest.text = object.value("phrase").toString();
+						
+						if(object.contains("snippet")) {
+							suggest.snippet = object.value("snippet").toString();
+						}
+						suggest.icon = QIcon::fromTheme(
+							"search",
+							QIcon(":/res/icons/actions/search.svg")
+						); // Icon to display
+
+						suggestionList.append(&suggest);
 					}
-					suggestionList.append(suggest);
 				}
 			}
+		} else {
+			qDebug() << "JSON Parse Error in DuckDuckGo Reply:" << error.errorString();
 		}
 	}
 	return suggestionList;

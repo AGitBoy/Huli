@@ -28,7 +28,7 @@ private:
 	WebView* getWebViewFromSender(QObject* senderObj);
 
 public slots:
-	WebView* newTab(QString str = Config::getNewTabPage());
+	WebView* newTab(const QString &str = Config::getNewTabPage());
 	WebView* newBackgroundTab(QString str = Config::getNewTabPage());
 	void hideTabBar(bool on);
 	void removeTabRequest(int index);

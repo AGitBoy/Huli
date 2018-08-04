@@ -33,7 +33,6 @@ add_executable(
 	src/main.cpp
 	src/App/Window.h
 	src/App/Window.cpp
-	src/Suggestions/suggestion.cpp
 	src/Suggestions/suggestion.h
 	src/Widgets/AddressBar.cpp
 	src/Widgets/AddressBar.h
@@ -68,7 +67,16 @@ add_executable(
 	src/Util/getFilenameFromPath.cpp
 	src/Widgets/TabBar.cpp
 	src/Widgets/TabBar.h
-	src/Util/fontUtils.cpp src/Util/fontUtils.h src/App/Config.cpp src/App/Config.h src/App/SearchEngine.cpp src/App/SearchEngine.h src/Suggestions/SuggestionEnum.h src/Web/BrowserBase.cpp src/Web/BrowserBase.h)
+	src/Util/fontUtils.cpp
+	src/Util/fontUtils.h
+	src/App/Config.cpp
+	src/App/Config.h
+	src/App/SearchEngine.cpp
+	src/App/SearchEngine.h
+	src/Suggestions/SuggestionEnum.h
+	src/Web/BrowserBase.cpp
+	src/Web/BrowserBase.h
+)
 
 target_link_libraries(Huli Qt5::Widgets)
 target_link_libraries(Huli Qt5::WebEngineWidgets)

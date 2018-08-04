@@ -1,7 +1,3 @@
-//
-// Created by aidan on 7/16/18.
-//
-
 #include "CLIParser.h"
 
 QCommandLineParser* CLIParser::newParser() {

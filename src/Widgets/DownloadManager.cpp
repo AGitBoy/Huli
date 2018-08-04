@@ -40,13 +40,13 @@ void DownloadManager::downloadRequested(QWebEngineDownloadItem* download) {
 			auto warningMsg = tr("The file %1 is an executable and could be harmful to your system."
 			                     "Are you sure you want to download?").arg(getFilenameFromPath(download->path()));
 			
-			int warningStatus = QMessageBox::warning(
+			QMessageBox::StandardButton warningStatus = QMessageBox::warning(
 				widget_parent->window(),
 				tr("Confirm Download"),
 				warningMsg,
 				QMessageBox::Save | QMessageBox::Cancel
 			);
-			
+
 			if(warningStatus != QMessageBox::Save) {
 				download->cancel();
 				return;

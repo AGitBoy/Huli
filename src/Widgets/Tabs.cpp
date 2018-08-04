@@ -1,3 +1,5 @@
+#include <utility>
+
 #include <iostream>
 #include "Tabs.h"
 #include "WebPage.h"
@@ -39,7 +41,7 @@ void Tabs::fullScreenRequest(bool on) {
 	hideTabBar(on);
 }
 
-WebView* Tabs::newTab(QString str) {
+WebView* Tabs::newTab(const QString &str) {
 	WebView* view = makeTab(str);
 	setCurrentWidget(view);
 	return view;
@@ -71,11 +73,7 @@ void Tabs::changedHandler(int index) {
 }
 
 WebView* Tabs::getView(int index) {
-	#pragma clang diagnostic push
-	#pragma clang diagnostic ignored "-Wincompatible-pointer-types"
-	#pragma ide diagnostic ignored "CannotResolve"
 	return qobject_cast<ViewContainer*>(widget(index))->view;
-	#pragma clang diagnostic pop
 }
 
 void Tabs::viewTitleUpdate(QString title) {
@@ -116,7 +114,7 @@ WebView* Tabs::makeTab(QString input) {
 	auto* view(new WebView(myProfile));
 	
 	auto* container(new ViewContainer(view));
-	int i = addTab(container, view->title());
+	addTab(container, view->title());
 	
 	view->load(QUrl(input));
 	
@@ -139,5 +137,5 @@ WebView* Tabs::makeTab(QString input) {
 }
 
 WebView* Tabs::newBackgroundTab(QString str) {
-	return makeTab(str);
+	return makeTab(std::move(str));
 }

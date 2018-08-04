@@ -148,6 +148,7 @@ void PopupObject::showCompletion(QVector<suggestion*> choices) {
 			item->setToolTip(0, choices[i]->text);
 			
 			item->setText(1, choices[i]->snippet);
+			item->setTextColor(1, editor->palette().color(QPalette::Disabled, QPalette::Text));
 			item->setToolTip(1, choices[i]->snippet);
 			
 			item->setIcon(0, choices[i]->icon);

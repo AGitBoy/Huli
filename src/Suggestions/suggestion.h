@@ -3,22 +3,13 @@
 
 #include <QtWidgets>
 
-class suggestion: public QObject {
-Q_OBJECT;
-
-public:
-	explicit suggestion(
-		QString txt,
-		QString snip = "Search",
-		QIcon ico = QIcon::fromTheme(
-			"search",
-			QIcon(":/res/icons/actions/search.svg")
-		)
-	);
-	
+struct suggestion {
 	QString text; // Main text of suggestion
-	QString snippet; // Snippet for display, currently of no use.
-	QIcon icon; // Icon to display
+	QString snippet = "Search"; // Snippet for display, currently of no use.
+	QIcon icon = QIcon::fromTheme(
+		"search",
+		QIcon(":/res/icons/actions/search.svg")
+	); // Icon to display
 };
 
 
