@@ -1,8 +1,7 @@
 #include "PopupWindow.h"
 
 PopupWindow::PopupWindow(QWebEngineProfile* profile)
-	: QWidget(), view(new QWebEngineView(this)), urlBar(new QLineEdit(this)), favicon(new QAction(this)),
-	  exitFullScreenAction(new QAction(this)) {
+	: QWidget(), view(new PopupWebView(profile)), urlBar(new QLineEdit(this)), favicon(new QAction(this)) {
 	auto* layout = new QVBoxLayout;
 	setLayout(layout);
 	
@@ -15,22 +14,11 @@ PopupWindow::PopupWindow(QWebEngineProfile* profile)
 	urlBar->setReadOnly(true);
 	urlBar->addAction(favicon, QLineEdit::LeadingPosition);
 	
-	view->setPage(new QWebEnginePage(profile, view));
 	view->setFocus();
 	
-	view->settings()->setAttribute(QWebEngineSettings::FullScreenSupportEnabled, true);
-	
-	exitFullScreenAction->setShortcut(Qt::Key_Escape); // Press escape when fullscreen to exit fullscreen
-	exitFullScreenAction->setDisabled(isFullScreen());
-	
 	connect(
-		exitFullScreenAction, &QAction::triggered,
-		[this](bool) { view->triggerPageAction(QWebEnginePage::ExitFullScreen); }
-	);
-	
-	connect(
-		this->view->page(), SIGNAL(fullScreenRequested(QWebEngineFullScreenRequest)),
-		this, SLOT(fullScreenRequest(QWebEngineFullScreenRequest))
+		this->view, SIGNAL(fullScreenRequested(bool)),
+		this, SLOT(fullScreenRequest(bool))
 	);
 	
 	connect(
@@ -60,22 +48,17 @@ PopupWindow::PopupWindow(QWebEngineProfile* profile)
 	
 }
 
-void PopupWindow::fullScreenRequest(QWebEngineFullScreenRequest request) {
-	if(request.toggleOn()) {
-		// Hides urlBar and makes webview fullscreen
-		// Probably not the best way to do this
+void PopupWindow::fullScreenRequest(bool on) {
+	if(on) {
+		// Hides urlBar
 		urlBar->hide();
-		view->showFullScreen();
 		showFullScreen();
 		// todo: add fullscreen notification
-		exitFullScreenAction->setDisabled(false);
 	} else {
 		// Returns to normal
 		urlBar->show();
 		showNormal();
-		exitFullScreenAction->setDisabled(true);
 	}
-	request.accept(); // Are there any cases in which we want to reject this request? Maybe check for focus?
 }
 
 // I forget what this does and I'm scared to touch it.

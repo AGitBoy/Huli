@@ -76,6 +76,8 @@ add_executable(
 	src/Suggestions/SuggestionEnum.h
 	src/Web/BrowserBase.cpp
 	src/Web/BrowserBase.h
+	src/Web/PopupWebView.cpp
+	src/Web/PopupWebView.h
 )
 
 target_link_libraries(Huli Qt5::Widgets)

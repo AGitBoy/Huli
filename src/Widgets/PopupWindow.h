@@ -3,6 +3,7 @@
 
 #include <QtWebEngineWidgets>
 #include <QtWidgets>
+#include "PopupWebView.h"
 
 class PopupWindow: public QWidget {
 Q_OBJECT;
@@ -10,16 +11,15 @@ Q_OBJECT;
 public:
 	explicit PopupWindow(QWebEngineProfile* profile);
 	
-	QWebEngineView* view;
+	PopupWebView* view;
 	QAction* favicon;
-	QAction* exitFullScreenAction;
 
 private:
 	QLineEdit* urlBar;
 
 private slots:
 	void handleGeometryChangeRequested(const QRect &newGeometry);
-	void fullScreenRequest(QWebEngineFullScreenRequest request);
+	void fullScreenRequest(bool on);
 };
 
 

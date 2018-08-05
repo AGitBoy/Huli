@@ -5,14 +5,16 @@
 int main(int argc, char* argv[]) {
 	QApplication app(argc, argv);
 	
+	// Parse command line arguments
 	QCommandLineParser* parser = CLIParser::newParser();
 	parser->process(app);
 	
+	// Make main window
 	Window* mainWindow = CLIParser::windowFromArgs(parser);
 	
 	QApplication::setOrganizationName("com.agitboy");
 	QApplication::setApplicationName("Huli");
-	QApplication::setApplicationVersion("1.0");
+	QApplication::setApplicationVersion("DEVEL");
 	
 	QApplication::setWindowIcon(
 		QIcon::fromTheme(
@@ -21,7 +23,9 @@ int main(int argc, char* argv[]) {
 		)
 	);
 	
+	// Show window
 	mainWindow->setWindowTitle("Huli");
 	mainWindow->showMaximized();
+	
 	return QApplication::exec();
 }
