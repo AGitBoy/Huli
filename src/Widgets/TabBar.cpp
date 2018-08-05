@@ -1,7 +1,3 @@
-//
-// Created by aidan on 7/25/18.
-//
-
 #include "TabBar.h"
 
 TabBar::TabBar(QWidget* parent): QTabBar(parent), addTabButton(new QPushButton(this)) {

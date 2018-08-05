@@ -1,7 +1,3 @@
-//
-// Created by aidan on 7/15/18.
-//
-
 #include "DuckDuckGoProvider.h"
 
 QVector<suggestion*> DuckDuckGoProvider::getSuggestions(QNetworkReply* reply) {

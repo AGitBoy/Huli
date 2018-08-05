@@ -1,7 +1,3 @@
-//
-// Created by aidan on 7/21/18.
-//
-
 #ifndef HULI_WEBPAGE_H
 #define HULI_WEBPAGE_H
 

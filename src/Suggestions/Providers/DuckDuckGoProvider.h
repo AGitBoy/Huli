@@ -1,7 +1,3 @@
-//
-// Created by aidan on 7/15/18.
-//
-
 #ifndef HULI_DUCKDUCKGOPROVIDER_H
 #define HULI_DUCKDUCKGOPROVIDER_H
 

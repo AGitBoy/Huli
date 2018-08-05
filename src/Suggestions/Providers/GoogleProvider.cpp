@@ -1,7 +1,3 @@
-//
-// Created by aidan on 7/2/18.
-//
-
 #include "GoogleProvider.h"
 #include "suggestion.h"
 
