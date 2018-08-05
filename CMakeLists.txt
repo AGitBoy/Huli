@@ -3,6 +3,7 @@ project(Huli)
 
 set(CMAKE_CXX_STANDARD 11)
 
+############## REQUIRED FOR QT5 TO WORK ################
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTORCC ON)
@@ -16,6 +17,7 @@ find_package(Qt5Network)
 include_directories(${Qt5Widgets_INCLUDE_DIRS})
 include_directories(${Qt5WebEngineWidgets_INCLUDE_DIRS})
 include_directories(${Qt5Network_INCLUDE_DIRS})
+########################################################
 
 include_directories(src/)
 include_directories(src/Util)
@@ -25,7 +27,9 @@ include_directories(src/Suggestions)
 include_directories(src/Suggestions/Providers)
 include_directories(src/Web)
 
+########################## REQUIRED FOR QT5 TO WORK ############################
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
+################################################################################
 
 add_executable(
 	Huli
@@ -80,6 +84,8 @@ add_executable(
 	src/Web/PopupWebView.h
 )
 
+########### REQUIRED FOR QT5 TO WORK ############
 target_link_libraries(Huli Qt5::Widgets)
 target_link_libraries(Huli Qt5::WebEngineWidgets)
 target_link_libraries(Huli Qt5::Network)
+#################################################
