@@ -1,7 +1,7 @@
 #include "DuckDuckGoProvider.h"
 
-QVector<suggestion*> DuckDuckGoProvider::getSuggestions(QNetworkReply* reply) {
-	QVector<suggestion*> suggestionList;
+QVector<suggestion> DuckDuckGoProvider::getSuggestions(QNetworkReply* reply) {
+	QVector<suggestion> suggestionList;
 	
 	if(reply->error() == QNetworkReply::NoError) {
 		QByteArray replyData = reply->readAll();
@@ -28,7 +28,7 @@ QVector<suggestion*> DuckDuckGoProvider::getSuggestions(QNetworkReply* reply) {
 							QIcon(":/res/icons/actions/search.svg")
 						); // Icon to display
 
-						suggestionList.append(&suggest);
+						suggestionList.append(suggest);
 					}
 				}
 			}

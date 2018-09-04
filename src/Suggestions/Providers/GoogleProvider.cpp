@@ -1,8 +1,8 @@
 #include "GoogleProvider.h"
 #include "suggestion.h"
 
-QVector<suggestion*> GoogleProvider::getSuggestions(QNetworkReply* reply) {
-	QVector<suggestion*> suggestionList;
+QVector<suggestion> GoogleProvider::getSuggestions(QNetworkReply* reply) {
+	QVector<suggestion> suggestionList;
 	
 	if(reply->error() == QNetworkReply::NoError) {
 		QByteArray response = reply->readAll();
@@ -21,7 +21,7 @@ QVector<suggestion*> GoogleProvider::getSuggestions(QNetworkReply* reply) {
 					QIcon(":/res/icons/actions/search.svg")
 				); // Icon to display
 				
-				suggestionList.append(&choice);
+				suggestionList.append(choice);
 			}
 		}
 	}

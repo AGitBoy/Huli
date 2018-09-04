@@ -14,7 +14,7 @@ Q_OBJECT;
 public slots:
 	virtual QUrl getFmtUrl(QString inp) = 0; // Gets the url search suggestion url for the inputted query
 	// Parses the suggestions and returns a list of suggestions to display
-	virtual QVector<suggestion*> getSuggestions(QNetworkReply* reply) = 0;
+	virtual QVector<suggestion> getSuggestions(QNetworkReply* reply) = 0;
 };
 
 #endif //HULI_ABSTACTSUGGESTIONPROVIDER_H

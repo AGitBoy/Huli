@@ -32,7 +32,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 ################################################################################
 
 add_executable(
-	Huli
+	huli
 	huli.qrc
 	src/main.cpp
 	src/App/Window.h
@@ -85,7 +85,7 @@ add_executable(
 )
 
 ########### REQUIRED FOR QT5 TO WORK ############
-target_link_libraries(Huli Qt5::Widgets)
-target_link_libraries(Huli Qt5::WebEngineWidgets)
-target_link_libraries(Huli Qt5::Network)
+target_link_libraries(huli Qt5::Widgets)
+target_link_libraries(huli Qt5::WebEngineWidgets)
+target_link_libraries(huli Qt5::Network)
 #################################################

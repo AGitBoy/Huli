@@ -20,7 +20,7 @@ public:
 	AbstractSuggestionProvider* provider; // Abstract class providing search suggestions
 	
 	bool eventFilter(QObject* obj, QEvent* event) override;
-	void showCompletion(QVector<suggestion*> choices); // Shows the popup of completions
+	void showCompletion(QVector<suggestion> choices); // Shows the popup of completions
 
 public slots:
 	void doneCompletion(); // Called when completion is selected

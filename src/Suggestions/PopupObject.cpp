@@ -113,7 +113,7 @@ bool PopupObject::eventFilter(QObject* obj, QEvent* event) {
 	return false;
 }
 
-void PopupObject::showCompletion(QVector<suggestion*> choices) {
+void PopupObject::showCompletion(QVector<suggestion> choices) {
 	if(editor->text().isEmpty() || editor->text().isNull()) {
 		return;
 	}
@@ -144,14 +144,14 @@ void PopupObject::showCompletion(QVector<suggestion*> choices) {
 		// Truncates to 5
 		for(int i = 0; i < choices.length() && i < Config::getSuggestionTruncateLength(); ++i) {
 			auto item = new QTreeWidgetItem(popup);
-			item->setText(0, choices[i]->text);
-			item->setToolTip(0, choices[i]->text);
+			item->setText(0, choices[i].text);
+			item->setToolTip(0, choices[i].text);
 			
-			item->setText(1, choices[i]->snippet);
+			item->setText(1, choices[i].snippet);
 			item->setTextColor(1, editor->palette().color(QPalette::Disabled, QPalette::Text));
-			item->setToolTip(1, choices[i]->snippet);
+			item->setToolTip(1, choices[i].snippet);
 			
-			item->setIcon(0, choices[i]->icon);
+			item->setIcon(0, choices[i].icon);
 		}
 	}
 	
@@ -193,7 +193,7 @@ void PopupObject::suggest() {
 }
 
 void PopupObject::handleNetworkData(QNetworkReply* reply) {
-	QVector<suggestion*> choices = provider->getSuggestions(reply);
+	QVector<suggestion> choices = provider->getSuggestions(reply);
 	showCompletion(choices);
 	reply->deleteLater();
 }

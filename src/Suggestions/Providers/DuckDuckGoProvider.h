@@ -8,7 +8,7 @@
 class DuckDuckGoProvider: public AbstractSuggestionProvider {
 public slots:
 	QUrl getFmtUrl(QString inp) override;
-	QVector<suggestion*> getSuggestions(QNetworkReply* reply) override;
+	QVector<suggestion> getSuggestions(QNetworkReply* reply) override;
 };
 
 
