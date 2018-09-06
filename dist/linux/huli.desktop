@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Huli
+Icon=huli
+GenericName=Web Browser
+Categories=Network;WebBrowser;
+Keywords=web;browser;internet;
+Terminal=false
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
+Type=Application
+Exec=huli %u
