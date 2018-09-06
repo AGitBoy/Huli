@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
 	
 	QApplication::setOrganizationName("com.agitboy");
 	QApplication::setApplicationName("Huli");
-	QApplication::setApplicationVersion("DEVEL");
+	QApplication::setApplicationVersion("1.0.0");
 	
 	QApplication::setWindowIcon(
 		QIcon::fromTheme(

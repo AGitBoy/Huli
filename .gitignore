@@ -8,3 +8,4 @@ cmake-build-release/
 # Deploy script generated resources
 dist/linux/AppImage/AppDir
 dist/linux/AppImage/tools
+dist/linux/AppImage/Huli-x86_64.AppImage
