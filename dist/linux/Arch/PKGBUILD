@@ -10,7 +10,7 @@ depends=("qt5-base" "qt5-webengine")
 makedepends=("cmake" "qt5-tools" "extra-cmake-modules" "gcc")
 provides=("huli")
 source=("https://github.com/AGitBoy/Huli/archive/$pkgver.tar.gz")
-md5sums=('dbc87329ac994ab466f5f3faa1308f82')
+md5sums=('SKIP')
 
 build() {
     cd "Huli-$pkgver"
