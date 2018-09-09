@@ -1,0 +1,43 @@
+# Maintainer: Aidan Williams <aidanwillie0317@protonmail.com>
+pkgname="huli"
+pkgver="1.0.beta.0"
+pkgrel=1
+pkgdesc="A Simple Qt5 Based Web Browser"
+arch=("x86_64")
+url="https://github.com/AGitBoy/Huli"
+license=('Apache')
+depends=("qt5-base" "qt5-webengine")
+makedepends=("cmake" "qt5-tools" "extra-cmake-modules" "gcc")
+provides=("huli")
+source=("https://github.com/AGitBoy/Huli/archive/$pkgver.tar.gz")
+md5sums=('dbc87329ac994ab466f5f3faa1308f82')
+
+build() {
+    cd "Huli-$pkgver"
+    if [ ! -d cmake-build-release ]; then
+        mkdir cmake-build-release
+    fi
+    cd cmake-build-release
+    cmake ..
+    cmake --build ./ --target huli -- -j 2
+}
+
+package() {
+    cd "Huli-$pkgver"
+
+    if [ ! -d "$pkgdir/usr/bin" ]; then
+        mkdir -p "$pkgdir/usr/bin"
+    fi
+
+    if [ ! -d "$pkgdir/usr/share/applications" ]; then
+        mkdir -p "$pkgdir/usr/share/applications"
+    fi
+
+    if [ ! -d "$pkgdir/usr/share/icons/hicolor/256x256/apps" ]; then
+        mkdir -p "$pkgdir/usr/share/icons/hicolor/256x256/apps"
+    fi
+
+    cp cmake-build-release/huli "$pkgdir/usr/bin/huli"
+    cp dist/linux/huli.desktop "$pkgdir/usr/share/applications/huli.desktop"
+    cp res/icons/app/logo.svg "$pkgdir/usr/share/icons/hicolor/256x256/apps"
+}
