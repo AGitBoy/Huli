@@ -25,21 +25,26 @@ public slots:
 	void makePanelUi();
 
 private:
-	const QStringList possiblyHarmfulFileTypes = { // Possibly make based on platform?
+	const QStringList possiblyHarmfulFileTypes = {
+	#if Q_OS_WINDOWS
 		// Windows executables
 		"application/x-ms-dos-executable",
 		"application/x-msi",
-
+	#elif Q_OS_MAC
 		// OS X Applications
 		"application/x-apple-diskimage",
 		"application/x-xar",
-
+	#else
 		// Debian Based Linux Distros
 		"application/vnd.debian.binary-package",
 		
 		// RPM Based Linux Distros
 		"application/x-rpm",
 		"application/x-source-rpm",
+		
+		// Arch Linux based distros
+		"application/x-alpm-package",
+		"application/x-xz-pkg",
 		
 		// Linux Snappy Packages
 		"application/vnd.snap",
@@ -54,9 +59,10 @@ private:
 		
 		// OpenSUSE One Click Install
 		"application/x-suse-ymp",
-
+	#endif
 		// Java Executables
 		"application/x-java-archive"
+	
 	};
 };
 

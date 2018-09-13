@@ -5,6 +5,7 @@
 #include "DuckDuckGoProvider.h"
 #include "AddressBarInput.h"
 #include "AddressBar.h"
+#include "iconProvider.h"
 
 PopupObject::PopupObject(AddressBarInput* editor): QObject(editor), editor(editor),
                                                    provider(Config::getProvider(Config::getCurrentEngine())) {
@@ -20,7 +21,7 @@ PopupObject::PopupObject(AddressBarInput* editor): QObject(editor), editor(edito
 	popup->setRootIsDecorated(false);
 	popup->setEditTriggers(QTreeWidget::NoEditTriggers);
 	popup->setSelectionBehavior(QTreeWidget::SelectRows);
-	popup->setFrameStyle(QFrame::Box | QFrame::Plain);
+	popup->setFrameStyle(QFrame::NoFrame);
 	
 	popup->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	popup->header()->hide();
@@ -134,7 +135,7 @@ void PopupObject::showCompletion(QVector<suggestion> choices) {
 	auto searchItem = new QTreeWidgetItem(popup);
 	forcedSearchItem = searchItem;
 	searchItem->setText(0, editor->text());
-	searchItem->setIcon(0, QIcon::fromTheme("search", QIcon(":/res/icons/actions/search.svg")));
+	searchItem->setIcon(0, iconProvider::getSearchIcon());
 	
 	if(!choices.isEmpty()) {
 		auto SuggestionSeparatorItem = new QTreeWidgetItem(popup);

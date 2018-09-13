@@ -23,10 +23,6 @@ QVector<suggestion> DuckDuckGoProvider::getSuggestions(QNetworkReply* reply) {
 						if(object.contains("snippet")) {
 							suggest.snippet = object.value("snippet").toString();
 						}
-						suggest.icon = QIcon::fromTheme(
-							"search",
-							QIcon(":/res/icons/actions/search.svg")
-						); // Icon to display
 
 						suggestionList.append(suggest);
 					}

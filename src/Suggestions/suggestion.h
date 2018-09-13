@@ -2,14 +2,12 @@
 #define HULI_SUGGESTION_H
 
 #include <QtWidgets>
+#include "iconProvider.h"
 
 struct suggestion {
 	QString text; // Main text of suggestion
-	QString snippet = "Search"; // Snippet for display, currently of no use.
-	QIcon icon = QIcon::fromTheme(
-		"search",
-		QIcon(":/res/icons/actions/search.svg")
-	); // Icon to display
+	QString snippet = "Search"; // Snippet for display
+	QIcon icon = iconProvider::getSearchIcon(); // Icon to display
 };
 
 

@@ -1,7 +1,8 @@
 #include "TabBar.h"
+#include "iconProvider.h"
 
 TabBar::TabBar(QWidget* parent): QTabBar(parent), addTabButton(new QPushButton(this)) {
-	addTabButton->setIcon(QIcon::fromTheme("tab-new", QIcon(":/res/icons/actions/plus.svg")));
+	addTabButton->setIcon(iconProvider::getNewTabIcon());
 	addTabButton->setFlat(true);
 	setUsesScrollButtons(false);
 }
@@ -45,10 +46,4 @@ int TabBar::getTabLength() const {
 	}
 }
 
-int TabBar::getTabBarMaxLength() const {
-	int tabSize = 0;
-	for(int i = 0; i < count(); ++i) {
-		tabSize += maxTabLength;
-	}
-	return tabSize;
-}
+int TabBar::getTabBarMaxLength() const { return maxTabLength * count(); }

@@ -21,7 +21,7 @@ public slots:
 	QWebEngineView* createWindow(QWebEnginePage::WebWindowType type) override;
 	void renderProcessQuit(QWebEnginePage::RenderProcessTerminationStatus terminationStatus, int statusCode);
 	void openDevTools();
-	
+
 private:
 	QRect windowGeometry;
 	QAction exitFullScreenAction;

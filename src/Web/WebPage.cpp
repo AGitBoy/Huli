@@ -50,6 +50,35 @@ void WebPage::registerProtocolHandler(QWebEngineRegisterProtocolHandlerRequest r
 	}
 }
 
+QStringList WebPage::chooseFiles(
+	QWebEnginePage::FileSelectionMode mode,
+	const QStringList &oldFiles,
+	const QStringList &acceptedMimeTypes) {
+	
+	QFileDialog::FileMode dialogMode;
+	if(mode == QWebEnginePage::FileSelectOpen) {
+		dialogMode = QFileDialog::ExistingFile;
+	} else {
+		dialogMode = QFileDialog::ExistingFiles;
+	}
+	
+	QFileDialog* dialog = new QFileDialog();
+	
+	dialog->setFileMode(dialogMode);
+
+	QStringList mimeFilters = acceptedMimeTypes;
+	mimeFilters << "application/octet-stream";
+	
+	dialog->setMimeTypeFilters(mimeFilters);
+	
+	QStringList selectedFiles;
+	if(dialog->exec()) {
+		selectedFiles = dialog->selectedFiles();
+	}
+	
+	return selectedFiles;
+}
+
 bool WebPage::certificateError(const QWebEngineCertificateError &error) {
 	QWidget* window = view()->window();
 	if(error.isOverridable()) {
@@ -84,13 +113,21 @@ void WebPage::makeDialog(QAuthenticator* authenticator, const QString &labelText
 	grid->addWidget(&iconLabel, 0, 0);
 	grid->addWidget(&textLabel, 0, 1);
 	
-	QLabel usernameLabel("Username:");
+	QLabel usernameLabel(fontUtils::setTextColor(
+		tr("Username: "),
+		textLabel.palette().color(QPalette::Disabled, QPalette::Text)
+	));
+	
 	QLineEdit usernameInput;
 	
 	grid->addWidget(&usernameLabel, 1, 0);
 	grid->addWidget(&usernameInput, 1, 1);
 	
-	QLabel passwordLabel("Password:");
+	QLabel passwordLabel(fontUtils::setTextColor(
+		tr("Password: "),
+		textLabel.palette().color(QPalette::Disabled, QPalette::Text)
+	));
+	
 	QLineEdit passwordInput;
 	passwordInput.setEchoMode(QLineEdit::Password);
 	

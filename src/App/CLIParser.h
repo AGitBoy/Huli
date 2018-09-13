@@ -3,9 +3,9 @@
 
 
 #include <QtCore>
+#include <QtWidgets>
 #include <QtDebug>
 #include "Window.h"
-
 
 // namespace holding various command line argument processing actions
 namespace CLIParser {

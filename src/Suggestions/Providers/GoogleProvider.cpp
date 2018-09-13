@@ -16,11 +16,6 @@ QVector<suggestion> GoogleProvider::getSuggestions(QNetworkReply* reply) {
 				
 				choice.text = xml.attributes().value("data").toString();
 				
-				choice.icon = QIcon::fromTheme(
-					"search",
-					QIcon(":/res/icons/actions/search.svg")
-				); // Icon to display
-				
 				suggestionList.append(choice);
 			}
 		}

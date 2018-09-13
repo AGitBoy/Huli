@@ -1,5 +1,4 @@
 #include <utility>
-
 #include <iostream>
 #include "Tabs.h"
 #include "WebPage.h"
@@ -30,7 +29,7 @@ Tabs::Tabs(QWebEngineProfile* profile): QTabWidget(), myProfile(profile), tabRow
 		this, &Tabs::changedHandler
 	);
 	
-	previous = newTab();
+	previous = newTab(Config::getHomePage());
 };
 
 WebView* Tabs::getWebViewFromSender(QObject* senderObj) {

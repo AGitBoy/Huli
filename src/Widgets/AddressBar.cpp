@@ -3,6 +3,7 @@
 #include "ViewContainer.h"
 #include "urlValidation.h"
 #include "Config.h"
+#include "iconProvider.h"
 
 AddressBar::AddressBar(ViewContainer* container)
 	: QWidget(), HBox(new QHBoxLayout()), input(new AddressBarInput(this)), view(container),
@@ -10,26 +11,11 @@ AddressBar::AddressBar(ViewContainer* container)
 	setMaximumHeight(200);
 	WebView* webView = view->view;
 	
-	backButton.setIcon(
-		QIcon::fromTheme(
-			"go-previous",
-			QIcon(":/res/icons/actions/arrow-left.svg")
-		)
-	);
+	backButton.setIcon(iconProvider::getBackIcon());
 	
-	nextButton.setIcon(
-		QIcon::fromTheme(
-			"go-next",
-			QIcon(":/res/icons/actions/arrow-right.svg")
-		)
-	);
+	nextButton.setIcon(iconProvider::getForwardIcon());
 	
-	reloadButton.setIcon(
-		QIcon::fromTheme(
-			"view-refresh",
-			QIcon(":/res/icons/actions/refresh.svg")
-		)
-	);
+	reloadButton.setIcon(iconProvider::getReloadIcon());
 	
 	downloadsButton.setIcon(
 		QIcon::fromTheme(

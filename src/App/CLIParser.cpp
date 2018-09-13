@@ -3,7 +3,7 @@
 QCommandLineParser* CLIParser::newParser() {
 	auto* parser = new QCommandLineParser();
 	
-	parser->setApplicationDescription("Web Browser");
+	parser->setApplicationDescription(QCoreApplication::tr("Web Browser"));
 	parser->addHelpOption();
 	parser->addVersionOption();
 	
