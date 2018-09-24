@@ -17,12 +17,7 @@ AddressBar::AddressBar(ViewContainer* container)
 	
 	reloadButton.setIcon(iconProvider::getReloadIcon());
 	
-	downloadsButton.setIcon(
-		QIcon::fromTheme(
-			"downloads-emblem",
-			QIcon::fromTheme("download")
-		)
-	); // TODO: Add fallback icon
+	downloadsButton.setIcon(iconProvider::getDownloadIcon());
 	
 	connect(
 		webView->page()->profile(), &QWebEngineProfile::downloadRequested,

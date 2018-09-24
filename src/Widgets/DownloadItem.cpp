@@ -1,4 +1,5 @@
 #include "DownloadItem.h"
+#include "iconProvider.h"
 
 DownloadItem::DownloadItem(QWebEngineDownloadItem* item):
 	QWidget(),
@@ -12,7 +13,7 @@ DownloadItem::DownloadItem(QWebEngineDownloadItem* item):
 	status(new QLabel(this)) {
 	QMimeDatabase database;
 	
-	cancelButton->setIcon(QIcon::fromTheme("gtk-cancel", QIcon(":/res/icons/actions/cancel")));
+	cancelButton->setIcon(iconProvider::getCancelIcon());
 	
 	setMinimumHeight(100);
 	setMaximumHeight(100);
@@ -131,11 +132,7 @@ void DownloadItem::stateChanged(QWebEngineDownloadItem::DownloadState state) {
 }
 
 void DownloadItem::updatePauseIcon() {
-	if(download->isPaused()) {
-		pauseButton->setIcon(unpause);
-	} else {
-		pauseButton->setIcon(pause);
-	}
+	pauseButton->setIcon(download->isPaused() ? unpause : pause);
 }
 
 void DownloadItem::togglePause(bool) {

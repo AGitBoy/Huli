@@ -1,4 +1,5 @@
 #include "WebPage.h"
+#include "iconProvider.h"
 
 WebPage::WebPage(QWebEngineProfile* profile, QObject* parent): QWebEnginePage(profile, parent) {
 	connect(
@@ -101,7 +102,7 @@ void WebPage::makeDialog(QAuthenticator* authenticator, const QString &labelText
 	
 	auto* grid = new QGridLayout();
 	
-	QIcon labelIcon = QIcon::fromTheme("dialog-password"); // todo: add fallback icon
+	QIcon labelIcon = iconProvider::getSecurityIcon();
 	
 	QLabel textLabel(labelText);
 	QLabel iconLabel;

@@ -1,4 +1,5 @@
 #include "Config.h"
+#include <QtGlobal>
 
 QMap<QString, SearchEngine*> Config::getEngines() {
 	QMap<QString, SearchEngine*> returnList = {
@@ -52,10 +53,22 @@ AbstractSuggestionProvider* Config::getProvider(SearchEngine* engine) {
 			return new DuckDuckGoProvider();
 		case Google:
 			return new GoogleProvider();
+		default:
+			return nullptr;
 	}
 }
 
 int Config::getSuggestionTruncateLength() {
 	QSettings settings("com.agitboy", "Huli");
 	return settings.value("suggestions/truncate", 5).toInt();
+}
+
+bool Config::iconsFromDesktop() {
+	QSettings settings("com.agitboy", "Huli");
+	// If on linux, default is true, otherwise has to be manually set
+	#ifdef Q_OS_LINUX
+	return settings.value("ui/usesicontheme", true).toBool();
+	#else
+	return settings.value("ui/usesicontheme", false).toBool();
+	#endif
 }

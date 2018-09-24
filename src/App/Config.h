@@ -17,7 +17,9 @@ public:
 	static AbstractSuggestionProvider* getProvider(SearchEngine* engine);
 	static SuggestionEnum getProviderFromString(QString input);
 	static int getSuggestionTruncateLength();
+	static bool iconsFromDesktop();
 };
+
 
 
 #endif //HULI_CONFIG_H

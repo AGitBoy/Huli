@@ -82,7 +82,7 @@ add_executable(
 	src/Web/BrowserBase.h
 	src/Web/PopupWebView.cpp
 	src/Web/PopupWebView.h
-	src/Util/iconProvider.h)
+	src/Util/iconProvider.h src/Util/iconProvider.cpp)
 
 ########### REQUIRED FOR QT5 TO WORK ############
 target_link_libraries(huli Qt5::Widgets)

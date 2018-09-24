@@ -26,7 +26,7 @@ public slots:
 
 private:
 	const QStringList possiblyHarmfulFileTypes = {
-	#if Q_OS_WINDOWS
+	#ifdef Q_OS_WINDOWS
 		// Windows executables
 		"application/x-ms-dos-executable",
 		"application/x-msi",

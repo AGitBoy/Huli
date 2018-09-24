@@ -1,6 +1,7 @@
 #include <QtWidgets>
 #include "Window.h"
 #include "CLIParser.h"
+#include "iconProvider.h"
 
 int main(int argc, char* argv[]) {
 	QApplication app(argc, argv);
@@ -16,12 +17,7 @@ int main(int argc, char* argv[]) {
 	QApplication::setApplicationName("Huli");
 	QApplication::setApplicationVersion("1.0.0");
 	
-	QApplication::setWindowIcon(
-		QIcon::fromTheme(
-			"huli",
-			QIcon(":/res/icons/app/logo.svg")
-		)
-	);
+	QApplication::setWindowIcon(iconProvider::getLogo());
 	
 	// Show window
 	mainWindow->setWindowTitle("Huli");

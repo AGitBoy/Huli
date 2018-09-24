@@ -23,4 +23,21 @@
 	<qresource>
 		<file>res/icons/actions/search.svg</file>
 	</qresource>
+
+	<qresource>
+		<file>res/icons/actions/download.svg</file>
+	</qresource>
+
+	<qresource>
+		<file>res/icons/actions/pause.svg</file>
+	</qresource>
+
+	<qresource>
+		<file>res/icons/actions/play.svg</file>
+	</qresource>
+
+	<qresource>
+		<file>res/icons/actions/security.svg</file>
+	</qresource>
+
 </RCC>
