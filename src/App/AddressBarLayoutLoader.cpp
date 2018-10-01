@@ -35,6 +35,8 @@ QVector<layoutItems> AddressBarLayoutLoader::getLayout() {
 		}
 	}
 	
+	file->close();
+	
 	return layout;
 }
 
