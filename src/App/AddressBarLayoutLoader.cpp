@@ -2,10 +2,10 @@
 
 QString AddressBarLayoutLoader::getFile() {
 	if(!Config::loadCustomLayout() ||
-	   QStandardPaths::locate(QStandardPaths::GenericDataLocation, "toolbar.xml").isEmpty()) {
+	   QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "huli/toolbar.xml").isEmpty()) {
 		return ":/res/data/defaultToolbarLayout.xml";
 	}
-	return QStandardPaths::locate(QStandardPaths::GenericDataLocation, "toolbar.xml");
+	return QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "huli/toolbar.xml");
 }
 
 QVector<layoutItems> AddressBarLayoutLoader::getLayout() {
