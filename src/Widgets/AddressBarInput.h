@@ -1,3 +1,5 @@
+#include <utility>
+
 #ifndef HULI_ADDRESSBARINPUT_H
 #define HULI_ADDRESSBARINPUT_H
 
@@ -14,6 +16,12 @@ public:
 	
 	PopupObject popup;
 	AddressBar* bar;
+	
+public slots:
+	void searchAction(QString text) { emit search(std::move(text)); }
+
+signals:
+	void search(QString text);
 };
 
 #endif

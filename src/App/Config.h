@@ -18,6 +18,7 @@ public:
 	static SuggestionEnum getProviderFromString(QString input);
 	static int getSuggestionTruncateLength();
 	static bool iconsFromDesktop();
+	static bool loadCustomLayout();
 };
 
 

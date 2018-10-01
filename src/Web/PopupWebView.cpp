@@ -9,5 +9,5 @@ QWebEngineView* PopupWebView::newTab() {
 }
 
 QWebEngineView* PopupWebView::newBackgroundTab() {
-	return this; // Disables open in new tab
+	return this; // Disables open in new background tab
 }

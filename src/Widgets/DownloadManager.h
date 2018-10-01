@@ -12,11 +12,10 @@ class DownloadManager: public QObject {
 Q_OBJECT;
 
 public:
-	explicit DownloadManager(AddressBar* parent = nullptr);
+	explicit DownloadManager(QPushButton* parent = nullptr);
 	QVBoxLayout* mainLayout;
-	QWidget* widget_parent;
 	QWidget* downloadPanel;
-	AddressBar* bar;
+	QPushButton* button;
 	QList<QWebEngineDownloadItem*> downloadList;
 
 public slots:

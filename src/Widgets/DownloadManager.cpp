@@ -2,13 +2,13 @@
 #include "AddressBar.h"
 #include "ViewContainer.h"
 
-DownloadManager::DownloadManager(AddressBar* parent)
-	: QObject(), widget_parent(parent), mainLayout(nullptr), downloadPanel(
-	nullptr), downloadList({ }), bar(parent) {
+DownloadManager::DownloadManager(QPushButton* parent)
+	: QObject(), mainLayout(nullptr), downloadPanel(
+	nullptr), downloadList({ }), button(parent) {
 }
 
 void DownloadManager::makePanelUi() {
-	downloadPanel = new QWidget(widget_parent);
+	downloadPanel = new QWidget(button);
 	mainLayout = new QVBoxLayout(downloadPanel);
 	downloadPanel->setAttribute(Qt::WA_QuitOnClose, false);
 	downloadPanel->setWindowFlags(Qt::Popup);
@@ -23,10 +23,10 @@ void DownloadManager::makePanelUi() {
 	downloadPanel->setLayout(mainLayout);
 
 	downloadPanel->move(
-		bar->downloadsButton.mapToGlobal(
+		button->mapToGlobal(
 			QPoint(
 				0 - downloadPanel->width(),
-				bar->downloadsButton.height()
+				button->height()
 			)
 		)
 	);
@@ -41,7 +41,7 @@ void DownloadManager::downloadRequested(QWebEngineDownloadItem* download) {
 			                     "Are you sure you want to download?").arg(getFilenameFromPath(download->path()));
 			
 			QMessageBox::StandardButton warningStatus = QMessageBox::warning(
-				widget_parent->window(),
+				button->window(),
 				tr("Confirm Download"),
 				warningMsg,
 				QMessageBox::Save | QMessageBox::Cancel

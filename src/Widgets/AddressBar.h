@@ -18,17 +18,9 @@ public:
 	
 	ViewContainer* view; // Parent
 	QHBoxLayout* HBox; // Layout
-	AddressBarInput* input; // Points to the text input
-	QPushButton backButton; // Back navigational button
-	QPushButton nextButton; // Forward navigational button
-	QPushButton reloadButton; // Forward navigation button
-	QPushButton downloadsButton;
-	DownloadManager* manager;
 
 public slots:
 	void urlChange(QUrl url);
-	void search();
-	void searchForce();
 	void searchFromInput(const QString &query);
 	void searchForce(const QString &query);
 	void hider(bool on);

@@ -66,7 +66,7 @@ bool PopupObject::eventFilter(QObject* obj, QEvent* event) {
 		if(popup->rect().contains(mouseEvent->pos())) { // Check if mouse is hovering popup or not
 			popup->hide();
 			editor->setFocus();
-			editor->bar->search();
+			editor->searchAction(editor->text());
 			return true;
 		} else {
 			timer.stop();
@@ -182,10 +182,10 @@ void PopupObject::doneCompletion() {
 	
 	if(item && item != forcedSearchItem) {
 		editor->setText(item->text(0));
-		editor->bar->search();
+		editor->searchAction(editor->text());
 	} else if(item && item == forcedSearchItem) {
 		editor->setText(item->text(0));
-		editor->bar->searchForce();
+		editor->bar->searchForce(editor->text());
 	}
 }
 

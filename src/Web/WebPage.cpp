@@ -89,9 +89,10 @@ bool WebPage::certificateError(const QWebEngineCertificateError &error) {
 			error.errorDescription(),
 			QMessageBox::Abort | QMessageBox::Ignore
 		) == QMessageBox::Ignore;
+	} else {
+		QMessageBox::critical(window, "Certificate Error", error.errorDescription(), QMessageBox::Ok);
+		return false;
 	}
-	
-	return false;
 }
 
 void WebPage::makeDialog(QAuthenticator* authenticator, const QString &labelText) {

@@ -3,7 +3,7 @@
 
 #include <AbstactSuggestionProvider.h>
 
-// Pulls suggestions from google
+// Pulls suggestions from Google
 class GoogleProvider: public AbstractSuggestionProvider {
 public:
 	QUrl getFmtUrl(QString inp) override;

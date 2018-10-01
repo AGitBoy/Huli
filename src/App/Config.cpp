@@ -72,3 +72,8 @@ bool Config::iconsFromDesktop() {
 	return settings.value("ui/usesicontheme", false).toBool();
 	#endif
 }
+
+bool Config::loadCustomLayout() {
+	QSettings settings("com.agitboy", "Huli");
+	return settings.value("ui/loadlayout", true).toBool();
+}

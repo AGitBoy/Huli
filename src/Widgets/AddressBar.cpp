@@ -4,77 +4,107 @@
 #include "urlValidation.h"
 #include "Config.h"
 #include "iconProvider.h"
+#include "AddressBarLayoutLoader.h"
 
 AddressBar::AddressBar(ViewContainer* container)
-	: QWidget(), HBox(new QHBoxLayout()), input(new AddressBarInput(this)), view(container),
-	  manager(new DownloadManager(this)) {
+	: QWidget(), HBox(new QHBoxLayout()), view(container) {
 	setMaximumHeight(200);
-	WebView* webView = view->view;
+	WebView* webView = container->view;
 	
-	backButton.setIcon(iconProvider::getBackIcon());
 	
-	nextButton.setIcon(iconProvider::getForwardIcon());
+	QVector<layoutItems> layout = AddressBarLayoutLoader::getLayout();
 	
-	reloadButton.setIcon(iconProvider::getReloadIcon());
-	
-	downloadsButton.setIcon(iconProvider::getDownloadIcon());
-	
-	connect(
-		webView->page()->profile(), &QWebEngineProfile::downloadRequested,
-		manager, &DownloadManager::downloadRequested
-	);
-	
-	connect(
-		&downloadsButton, &QPushButton::clicked,
-		manager, &DownloadManager::toggleHidden
-	);
-	
-	connect(
-		&backButton, &QPushButton::clicked,
-		webView, &QWebEngineView::back
-	);
-	
-	connect(
-		&nextButton, &QPushButton::clicked,
-		webView, &QWebEngineView::forward
-	);
-	
-	connect(
-		&reloadButton, &QPushButton::clicked,
-		webView, &QWebEngineView::reload
-	);
-	
-	connect(
-		webView, &QWebEngineView::urlChanged,
-		this, &AddressBar::urlChange
-	);
+	for(int i = 0; i < layout.length(); ++i) { // NOLINT
+		switch(layout[i]) {
+			case layoutItems::Back: {
+				auto* back = new QPushButton(this);
+				back->setIcon(iconProvider::getBackIcon());
+				
+				connect(
+					back, &QPushButton::clicked,
+					webView, &QWebEngineView::back
+				);
+				
+				HBox->addWidget(back);
+				
+				break;
+			}
+			case layoutItems::Forward: {
+				auto* nextButton = new QPushButton(this); // Forward navigational button
+				nextButton->setIcon(iconProvider::getForwardIcon());
+				
+				connect(
+					nextButton, &QPushButton::clicked,
+					webView, &QWebEngineView::forward
+				);
+				HBox->addWidget(nextButton);
+				
+				break;
+			}
+			case layoutItems::Reload: {
+				auto* reloadButton = new QPushButton(this); // Reload page navigation button
+				reloadButton->setIcon(iconProvider::getReloadIcon());
+				
+				connect(
+					reloadButton, &QPushButton::clicked,
+					webView, &QWebEngineView::reload
+				);
+				
+				HBox->addWidget(reloadButton);
+				
+				break;
+			}
+			case layoutItems::UrlBar: {
+				auto* input = new AddressBarInput(this); // Points to the text input
+				
+				connect(
+					webView, &QWebEngineView::urlChanged,
+					[this, input](QUrl url) { input->setText(url.toString()); }
+				);
+				connect(
+					input, &AddressBarInput::search,
+					this, &AddressBar::searchFromInput
+				);
+				
+				HBox->addWidget(input);
+				
+				break;
+			}
+			case layoutItems::Downloads: {
+				auto* downloadsButton = new QPushButton(this);
+				downloadsButton->setIcon(iconProvider::getDownloadIcon());
+				
+				auto* manager = new DownloadManager(downloadsButton);
+				
+				connect(
+					downloadsButton, &QPushButton::clicked,
+					manager, &DownloadManager::toggleHidden
+				);
+				
+				connect(
+					webView->page()->profile(), &QWebEngineProfile::downloadRequested,
+					manager, &DownloadManager::downloadRequested
+				);
+				
+				HBox->addWidget(downloadsButton);
+				break;
+			}
+			default: {
+				break;
+			}
+		}
+	}
 	
 	connect(
 		webView, &WebView::fullScreenRequested,
 		this, &AddressBar::hider
 	);
-	
-	connect(
-		input, &QLineEdit::returnPressed,
-		this, &AddressBar::search
-	);
-	
-	HBox->addWidget(&backButton);
-	HBox->addWidget(&nextButton);
-	HBox->addWidget(&reloadButton);
-	HBox->addWidget(input);
-	HBox->addWidget(&downloadsButton);
-	
+
 	setLayout(HBox);
 };
 
 void AddressBar::urlChange(QUrl url) {
-	input->setText(url.toString());
 };
-
-void AddressBar::search() {
-	searchFromInput(input->text());
-}
 
 void AddressBar::hider(bool on) {
 	if(on) {
@@ -82,10 +112,6 @@ void AddressBar::hider(bool on) {
 	} else {
 		show();
 	}
-}
-
-void AddressBar::searchForce() {
-	searchForce(input->text());
 }
 
 void AddressBar::searchForce(const QString &query) {
