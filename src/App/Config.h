@@ -7,6 +7,8 @@
 #include "GoogleProvider.h"
 #include "SuggestionEnum.h"
 
+#define GET_SETTINGS QSettings settings("huli", "huli");
+
 // Static class for getting various settings
 class Config {
 public:
@@ -19,6 +21,7 @@ public:
 	static int getSuggestionTruncateLength();
 	static bool iconsFromDesktop();
 	static bool loadCustomLayout();
+	static bool loadCustomEngines();
 };
 
 
