@@ -14,8 +14,9 @@ public:
 public slots:
 	void authenticationRequiredHandler(const QUrl &srcUrl, QAuthenticator* authenticator);
 	void authenticationRequiredProxyHandler(const QUrl &srcUrl, QAuthenticator* authenticator, const QString &proxyHost);
+#if QT_11_SUPPORT
 	void registerProtocolHandler(QWebEngineRegisterProtocolHandlerRequest request);
-
+#endif
 private:
 	void makeDialog(QAuthenticator* authenticator, const QString &labelText);
 	

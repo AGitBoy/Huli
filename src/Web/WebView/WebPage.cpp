@@ -11,12 +11,12 @@ WebPage::WebPage(QWebEngineProfile* profile, QObject* parent): QWebEnginePage(pr
 		this, &QWebEnginePage::proxyAuthenticationRequired,
 		this, &WebPage::authenticationRequiredProxyHandler
 	);
-	
+#if QT_11_SUPPORT
 	connect(
 		this, &QWebEnginePage::registerProtocolHandlerRequested,
 		this, &WebPage::registerProtocolHandler
 	);
-	
+#endif
 }
 
 void WebPage::authenticationRequiredHandler(const QUrl &srcUrl, QAuthenticator* authenticator) {
@@ -37,6 +37,7 @@ void WebPage::authenticationRequiredProxyHandler(const QUrl &srcUrl, QAuthentica
 	makeDialog(authenticator, labelText);
 }
 
+#if QT_11_SUPPORT
 void WebPage::registerProtocolHandler(QWebEngineRegisterProtocolHandlerRequest request) {
 	auto answer = QMessageBox::question(
 		view()->window(),
@@ -50,6 +51,7 @@ void WebPage::registerProtocolHandler(QWebEngineRegisterProtocolHandlerRequest r
 		request.reject();
 	}
 }
+#endif
 
 QStringList WebPage::chooseFiles(
 	QWebEnginePage::FileSelectionMode mode,

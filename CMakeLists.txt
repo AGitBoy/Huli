@@ -99,3 +99,9 @@ target_link_libraries(huli Qt5::Widgets)
 target_link_libraries(huli Qt5::WebEngineWidgets)
 target_link_libraries(huli Qt5::Network)
 #################################################
+
+if(Qt5Widgets_VERSION VERSION_LESS 5.11.0)
+	target_compile_definitions(huli PRIVATE QT_11_SUPPORT=0)
+else()
+	target_compile_definitions(huli PRIVATE QT_11_SUPPORT=1)
+endif()
