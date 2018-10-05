@@ -25,14 +25,18 @@ public:
 	const QIcon unpause = iconProvider::getPlayIcon();
 
 private:
-	void updatePauseIcon();
+	#if QT_10_SUPPORT
+		void updatePauseIcon();
+	#endif
 	void setStatusText(const QString &text);
 
 public slots:
 	void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 	void finished();
-	void isPausedChanged(bool isChanged);
-	void togglePause(bool);
+	#if QT_10_SUPPORT
+		void isPausedChanged(bool isChanged);
+		void togglePause(bool);
+	#endif
 	void stateChanged(QWebEngineDownloadItem::DownloadState state);
 	
 };

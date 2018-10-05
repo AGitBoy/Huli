@@ -25,7 +25,7 @@ QWebEngineView* WebView::newBackgroundTab() {
 void WebView::contextMenuEvent(QContextMenuEvent* event) {
 	QMenu* menu = page()->createStandardContextMenu();
 	const QList<QAction*> actions = menu->actions();
-	
+	#if QT_11_SUPPORT
 	auto inspectElement = std::find(actions.cbegin(), actions.cend(), page()->action(QWebEnginePage::InspectElement));
 	
 	if(inspectElement == actions.cend()) {
@@ -47,6 +47,6 @@ void WebView::contextMenuEvent(QContextMenuEvent* event) {
 	} else {
 		(*inspectElement)->setText(tr("Inspect element"));
 	}
-	
+	#endif
 	menu->popup(event->globalPos());
 }

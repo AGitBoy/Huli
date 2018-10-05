@@ -27,12 +27,12 @@ DownloadItem::DownloadItem(QWebEngineDownloadItem* item):
 		download, &QWebEngineDownloadItem::downloadProgress,
 		this, &DownloadItem::downloadProgress
 	);
-	
+	#if QT_10_SUPPORT
 	connect(
 		download, &QWebEngineDownloadItem::isPausedChanged,
 		this, &DownloadItem::isPausedChanged
 	);
-	
+	#endif
 	connect(
 		download, &QWebEngineDownloadItem::stateChanged,
 		this, &DownloadItem::stateChanged
@@ -43,10 +43,12 @@ DownloadItem::DownloadItem(QWebEngineDownloadItem* item):
 		this, &DownloadItem::finished
 	);
 	
+	#if QT_10_SUPPORT
 	connect(
 		pauseButton, &QPushButton::clicked,
 		this, &DownloadItem::togglePause
 	);
+	#endif
 	
 	connect(
 		cancelButton, &QPushButton::clicked,
@@ -60,8 +62,14 @@ DownloadItem::DownloadItem(QWebEngineDownloadItem* item):
 	
 	textLabel->setText(fontUtils::bold(getFilenameFromPath(download->path())));
 	
+	#if QT_10_SUPPORT
 	updatePauseIcon();
-	
+	#else
+		pauseButton->setIcon(pause);
+		pauseButton->setEnabled(false);
+		pauseButton->setToolTip(tr("Qt 5.10 or above required to pause downloads"));
+	#endif
+
 	grid->addWidget(iconLabel, 0, 0);
 	grid->addWidget(textLabel, 0, 1, 1, 2);
 	grid->addWidget(progressBar, 1, 2);
@@ -91,14 +99,6 @@ void DownloadItem::finished() {
 	progressBar->setValue(1);
 }
 
-void DownloadItem::isPausedChanged(bool isPaused) {
-	updatePauseIcon();
-	if(isPaused) {
-		setStatusText(tr("Paused"));
-	} else {
-		setStatusText(tr("In Progress"));
-	}
-}
 
 void DownloadItem::stateChanged(QWebEngineDownloadItem::DownloadState state) {
 	switch(state) {
@@ -131,6 +131,16 @@ void DownloadItem::stateChanged(QWebEngineDownloadItem::DownloadState state) {
 	}
 }
 
+#if QT_10_SUPPORT
+void DownloadItem::isPausedChanged(bool isPaused) {
+	updatePauseIcon();
+	if(isPaused) {
+		setStatusText(tr("Paused"));
+	} else {
+		setStatusText(tr("In Progress"));
+	}
+}
+
 void DownloadItem::updatePauseIcon() {
 	pauseButton->setIcon(download->isPaused() ? unpause : pause);
 }
@@ -144,6 +154,7 @@ void DownloadItem::togglePause(bool) {
 		updatePauseIcon();
 	}
 }
+#endif
 
 void DownloadItem::setStatusText(const QString &text) {
 	status->setText(fontUtils::setTextColor(text, QWidget::palette().color(QPalette::Disabled, QPalette::Text)));

@@ -110,14 +110,15 @@ void BrowserBase::renderProcessQuit(QWebEnginePage::RenderProcessTerminationStat
 	}
 }
 
+#if QT_11_SUPPORT
 void BrowserBase::openDevTools() {
 	auto devToolsWindow = new QWebEngineView(); // TODO: Replace with subclass of BrowserBase
 	devToolsWindow->setAttribute(Qt::WA_DeleteOnClose);
 	
-	page()->setDevToolsPage(devToolsWindow->page());
 	devToolsWindow->show();
 	page()->triggerAction(QWebEnginePage::InspectElement);
 }
+#endif
 
 QWebEngineView* BrowserBase::newPopup() {
 	auto dialog = new PopupWindow(page()->profile());
