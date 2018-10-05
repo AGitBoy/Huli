@@ -10,7 +10,7 @@ if [ ! ${buildSuccess} = 0 ]; then
     echo "Build Failed"
     echo "Ensure you have the proper dependencies installed"
     exit 1
-fi;
+fi
 
 cd dist/linux
 
