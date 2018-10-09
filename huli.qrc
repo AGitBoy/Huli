@@ -29,6 +29,10 @@
 	</qresource>
 
 	<qresource>
+		<file>res/icons/actions/cancel.svg</file>
+	</qresource>
+
+	<qresource>
 		<file>res/icons/actions/pause.svg</file>
 	</qresource>
 

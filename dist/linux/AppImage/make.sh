@@ -4,7 +4,7 @@ cd ../../../
 
 buildSuccess=0
 
-cmake --build cmake-build-release --target huli -- -j 2 || buildSuccess=1
+cmake --build cmake-build-release --target huli -- -j 2 -DENABLE_X11_ICONS=0 || buildSuccess=1
 
 if [ ! ${buildSuccess} = 0 ]; then
     echo "Build Failed"

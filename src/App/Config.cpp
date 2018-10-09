@@ -94,7 +94,7 @@ int Config::getSuggestionTruncateLength() {
 bool Config::iconsFromDesktop() {
 	GET_SETTINGS
 	// If on linux, default is true, otherwise has to be manually set
-	#ifdef Q_OS_LINUX
+	#if X11_ICONS_DEFAULT
 	return settings.value("ui/usesicontheme", true).toBool();
 	#else
 	return settings.value("ui/usesicontheme", false).toBool();
