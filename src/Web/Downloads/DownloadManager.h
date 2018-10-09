@@ -33,7 +33,7 @@ private:
 		// OS X Applications
 		"application/x-apple-diskimage",
 		"application/x-xar",
-	#else
+	#elif PLATFORM_X11
 		// Debian Based Linux Distros
 		"application/vnd.debian.binary-package",
 		

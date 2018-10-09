@@ -25,7 +25,7 @@ void DownloadManager::makePanelUi() {
 	downloadPanel->move(
 		button->mapToGlobal(
 			QPoint(
-				0 - downloadPanel->width(),
+				0 - downloadPanel->width() + button->width(),
 				button->height()
 			)
 		)
