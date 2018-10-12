@@ -2,7 +2,7 @@
 #include "AddressBarInput.h"
 #include "ViewContainer.h"
 #include "urlValidation.h"
-#include "Config.h"
+#include "Settings.h"
 #include "iconProvider.h"
 #include "AddressBarLayoutLoader.h"
 
@@ -115,12 +115,12 @@ void AddressBar::hider(bool on) {
 }
 
 void AddressBar::searchForce(const QString &query) {
-	QString search = Config::getCurrentEngine()->url;
+	QString search = Settings::getCurrentEngine()->url;
 	view->view->load(search.arg(query));
 }
 
 void AddressBar::searchFromInput(const QString &query) {
-	QString search = Config::getCurrentEngine()->url;
+	QString search = Settings::getCurrentEngine()->url;
 	if(urlValidation(query)) {
 		view->view->load(query);
 	} else {

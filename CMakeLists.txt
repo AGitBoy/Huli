@@ -77,8 +77,8 @@ add_executable(
 	src/Widgets/Tabs/TabBar.h
 	src/Util/fontUtils.cpp
 	src/Util/fontUtils.h
-	src/App/Config.cpp
-	src/App/Config.h
+	src/App/Settings.cpp
+	src/App/Settings.h
 	src/Web/SearchEngine.cpp
 	src/Web/SearchEngine.h
 	src/Suggestions/SuggestionEnum.h

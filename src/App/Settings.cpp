@@ -1,11 +1,11 @@
-#include "Config.h"
+#include "Settings.h"
 #include <QtGlobal>
 #include "globals.h"
 
-QMap<QString, SearchEngine*> Config::getEngines() {
+QMap<QString, SearchEngine*> Settings::getEngines() {
 	QString path;
 	
-	if(!Config::loadCustomEngines() ||
+	if(!Settings::loadCustomEngines() ||
 	   QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "huli/engines.xml").isEmpty()) {
 		path = ":/res/data/defaultSearchProviders.xml";
 	} else {
@@ -53,7 +53,7 @@ QMap<QString, SearchEngine*> Config::getEngines() {
 	return returnList;
 }
 
-SuggestionEnum Config::getProviderFromString(QString input) {
+SuggestionEnum Settings::getProviderFromString(QString input) {
 	if(input.toLower() == "duckduckgo") {
 		return DuckDuckGo;
 	} else {
@@ -61,22 +61,22 @@ SuggestionEnum Config::getProviderFromString(QString input) {
 	}
 }
 
-SearchEngine* Config::getCurrentEngine() {
+SearchEngine* Settings::getCurrentEngine() {
 	GET_SETTINGS
 	return getEngines().value(settings.value("browser/searchEngine", "DuckDuckGo").toString());
 }
 
-QString Config::getHomePage() {
+QString Settings::getHomePage() {
 	GET_SETTINGS
 	return settings.value("browser/homepage", "https://start.duckduckgo.com").toString();
 }
 
-QString Config::getNewTabPage() {
+QString Settings::getNewTabPage() {
 	GET_SETTINGS
 	return settings.value("browser/newtab", "https://start.duckduckgo.com").toString();
 }
 
-AbstractSuggestionProvider* Config::getProvider(SearchEngine* engine) {
+AbstractSuggestionProvider* Settings::getProvider(SearchEngine* engine) {
 	switch(engine->provider) {
 		case DuckDuckGo:
 			return new DuckDuckGoProvider();
@@ -87,12 +87,12 @@ AbstractSuggestionProvider* Config::getProvider(SearchEngine* engine) {
 	}
 }
 
-int Config::getSuggestionTruncateLength() {
+int Settings::getSuggestionTruncateLength() {
 	GET_SETTINGS
 	return settings.value("suggestions/truncate", 5).toInt();
 }
 
-bool Config::iconsFromDesktop() {
+bool Settings::iconsFromDesktop() {
 	GET_SETTINGS
 	// If on linux, default is true, otherwise has to be manually set
 	#if USE_X11_ICONS
@@ -102,12 +102,12 @@ bool Config::iconsFromDesktop() {
 	#endif
 }
 
-bool Config::loadCustomLayout() {
+bool Settings::loadCustomLayout() {
 	GET_SETTINGS
 	return settings.value("ui/loadlayout", true).toBool();
 }
 
-bool Config::loadCustomEngines() {
+bool Settings::loadCustomEngines() {
 	GET_SETTINGS
 	return settings.value("search/loadCustomEngines", true).toBool();
 }

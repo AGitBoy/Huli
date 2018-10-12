@@ -29,7 +29,7 @@ Tabs::Tabs(QWebEngineProfile* profile): QTabWidget(), myProfile(profile), tabRow
 		this, &Tabs::changedHandler
 	);
 	
-	previous = newTab(Config::getHomePage());
+	previous = newTab(Settings::getHomePage());
 };
 
 WebView* Tabs::getWebViewFromSender(QObject* senderObj) {

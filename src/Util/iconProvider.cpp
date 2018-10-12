@@ -1,8 +1,8 @@
 #include "iconProvider.h"
-#include "Config.h"
+#include "Settings.h"
 
 QIcon iconProvider::getIcon(QString iconName, QString iconPath, QStringList fallbackIcons) {
-	if(!Config::iconsFromDesktop()) {
+	if(!Settings::iconsFromDesktop()) {
 		return QIcon(iconPath);
 	} else {
 		if(iconPath == nullptr) {

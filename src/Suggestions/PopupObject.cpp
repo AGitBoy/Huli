@@ -8,7 +8,7 @@
 #include "iconProvider.h"
 
 PopupObject::PopupObject(AddressBarInput* editor): QObject(editor), editor(editor),
-                                                   provider(Config::getProvider(Config::getCurrentEngine())) {
+                                                   provider(Settings::getProvider(Settings::getCurrentEngine())) {
 	
 	popup = new QTreeWidget;
 	popup->setWindowFlags(Qt::Popup);
@@ -130,7 +130,7 @@ void PopupObject::showCompletion(QVector<suggestion> choices) {
 	SearchSeparatorItem->setDisabled(true);
 	
 	SearchSeparatorItem
-		->setText(0, tr("Search %1").arg(Config::getCurrentEngine()->name));
+		->setText(0, tr("Search %1").arg(Settings::getCurrentEngine()->name));
 	
 	auto searchItem = new QTreeWidgetItem(popup);
 	forcedSearchItem = searchItem;
@@ -143,7 +143,7 @@ void PopupObject::showCompletion(QVector<suggestion> choices) {
 		SuggestionSeparatorItem->setText(0, "Suggestions");
 		
 		// Truncates to 5
-		for(int i = 0; i < choices.length() && i < Config::getSuggestionTruncateLength(); ++i) {
+		for(int i = 0; i < choices.length() && i < Settings::getSuggestionTruncateLength(); ++i) {
 			auto item = new QTreeWidgetItem(popup);
 			item->setText(0, choices[i].text);
 			item->setToolTip(0, choices[i].text);

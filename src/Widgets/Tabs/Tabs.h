@@ -7,7 +7,7 @@
 #include "WebView.h"
 #include "ViewContainer.h"
 #include "TabBar.h"
-#include "Config.h"
+#include "Settings.h"
 
 class Tabs: public QTabWidget {
 Q_OBJECT;
@@ -28,8 +28,8 @@ private:
 	WebView* getWebViewFromSender(QObject* senderObj);
 
 public slots:
-	WebView* newTab(const QString &str = Config::getNewTabPage());
-	WebView* newBackgroundTab(QString str = Config::getNewTabPage());
+	WebView* newTab(const QString &str = Settings::getNewTabPage());
+	WebView* newBackgroundTab(QString str = Settings::getNewTabPage());
 	void hideTabBar(bool on);
 	void removeTabRequest(int index);
 	void changedHandler(int index);

@@ -2,7 +2,7 @@
 #define HULI_ADDRESSBARLAYOUTLOADER_H
 
 #include <QtCore>
-#include "Config.h"
+#include "Settings.h"
 
 enum layoutItems {
 	Back,

@@ -10,7 +10,7 @@
 #define GET_SETTINGS QSettings settings("huli", "huli");
 
 // Static class for getting various settings
-class Config {
+class Settings {
 public:
 	static QMap<QString, SearchEngine*> getEngines();
 	static SearchEngine* getCurrentEngine();
