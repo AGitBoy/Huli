@@ -1,17 +1,30 @@
 #!/bin/bash
 
-cd ../../../
+src_dir="$(realpath ../../../)"
+img_dir="$(pwd)"
 
+if [ -d build ]; then
+    rm -rf build
+fi
+
+mkdir build && cd build
 buildSuccess=0
 
-cmake --build cmake-build-release --target huli -- -j 2 -DENABLE_X11_ICONS=0 || buildSuccess=1
+cmake -DENABLE_X11_ICONS=OFF --target huli -- j 2 "$src_dir" || buildSuccess=1
 
 if [ ! ${buildSuccess} = 0 ]; then
-    echo "Build Failed"
+    echo "CMake Configuration Failed"
     exit 1
-fi;
+else
+    makeSuccess=0
+    make || makeSuccess=1
+    if [ ! ${makeSuccess} = 0 ]; then
+        echo "Make Failed"
+        exit 1
+    fi
+fi
 
-cd dist/linux/AppImage
+cd ../
 
 if [ ! -d tools ]; then
     mkdir tools
@@ -31,15 +44,22 @@ fi;
 
 cp -r dirSrc AppDir
 
-if [ -f ../../../cmake-build-release/huli ]; then
-    cd AppDir/usr/bin
-    cp ../../../../../../cmake-build-release/huli huli
-    cd ../../../
+if [ -f build/huli ]; then
+    cd ${img_dir}/AppDir/usr/bin
+    cp ${img_dir}/build/huli huli
+    cd ${img_dir}
 else
     echo "Executable not found in build directory"
     exit 1
 fi;
 
+# Fix for https://github.com/probonopd/linuxdeployqt/issues/35
+if python -mplatform | grep -qi Ubuntu; then
+    mkdir ${img_dir}AppDir/lib
+    cp /usr/lib/x86_64-linux-gnu/nss/* ${img_dir}/AppDir/lib
+    excluded='-exclude-libs="libnss3.so,libnssutil3.so"'
+fi
+
 export ARCH="x86_64"
 
-ARCH=x86_64 ./tools/linuxdeployqt-continuous-x86_64.AppImage AppDir/usr/share/applications/huli.desktop -appimage
+ARCH=x86_64 ${img_dir}/tools/linuxdeployqt-continuous-x86_64.AppImage ${img_dir}/AppDir/usr/share/applications/huli.desktop -appimage "$excluded"

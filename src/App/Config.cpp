@@ -1,5 +1,6 @@
 #include "Config.h"
 #include <QtGlobal>
+#include "globals.h"
 
 QMap<QString, SearchEngine*> Config::getEngines() {
 	QString path;
@@ -94,7 +95,7 @@ int Config::getSuggestionTruncateLength() {
 bool Config::iconsFromDesktop() {
 	GET_SETTINGS
 	// If on linux, default is true, otherwise has to be manually set
-	#if X11_ICONS_DEFAULT
+	#if USE_X11_ICONS
 	return settings.value("ui/usesicontheme", true).toBool();
 	#else
 	return settings.value("ui/usesicontheme", false).toBool();

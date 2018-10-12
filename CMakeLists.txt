@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
 project(Huli)
-
 set(CMAKE_CXX_STANDARD 11)
 
 ############## REQUIRED FOR QT5 TO WORK ################
@@ -91,7 +90,7 @@ add_executable(
 	src/Util/iconProvider.cpp
 	src/Widgets/AddressBar/AddressBarLayoutLoader.cpp
 	src/Widgets/AddressBar/AddressBarLayoutLoader.h
-)
+	src/globals.h)
 
 
 ########### REQUIRED FOR QT5 TO WORK ############
@@ -100,25 +99,26 @@ target_link_libraries(huli Qt5::WebEngineWidgets)
 target_link_libraries(huli Qt5::Network)
 #################################################
 
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+option(ENABLE_X11_ICONS "Use X11 Icon Theme on X11" ON)
+
 if(UNIX AND NOT APPLE)
 	set(PLATFORM_X11 1)
 else()
 	set(PLATFORM_X11 0)
 endif()
 
-option(ENABLE_X11_ICONS "Use X11 Icon Theme" ${PLATFORM_X11})
-
-add_compile_definitions(X11_ICONS_DEFAULT=$<BOOL:ENABLE_X11_ICONS>)
-add_compile_definitions(PLATFORM_X11=$<BOOL:PLATFORM_X11>)
-
 if(Qt5Widgets_VERSION VERSION_LESS 5.11.0)
-	target_compile_definitions(huli PRIVATE QT_11_SUPPORT=0)
+	set(QT_11_SUPPORT 0)
 else()
-	target_compile_definitions(huli PRIVATE QT_11_SUPPORT=1)
+	set(QT_11_SUPPORT 1)
 endif()
 
 if(Qt5Widgets_VERSION VERSION_LESS 5.10.0)
-	target_compile_definitions(huli PRIVATE QT_10_SUPPORT=0)
+	set(QT_10_SUPPORT 0)
 else()
-	target_compile_definitions(huli PRIVATE QT_10_SUPPORT=1)
+	set(QT_10_SUPPORT 1)
 endif()
+
+configure_file(config.h.in config.h)

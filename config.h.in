@@ -1,0 +1,14 @@
+#ifndef HULI_CMAKE_CONFIG_H
+#define HULI_CMAKE_CONFIG_H
+
+// Options
+#cmakedefine ENABLE_X11_ICONS
+
+// Qt Version Variables
+#cmakedefine QT_10_SUPPORT @QT_10_SUPPORT@ // If project is built on system with Qt 10 or Greater
+#cmakedefine QT_11_SUPPORT @QT_11_SUPPORT@ // If project is built on system with Qt 11 or Greater
+
+// X11 Variables
+#cmakedefine PLATFORM_X11 @PLATFORM_X11@
+
+#endif
