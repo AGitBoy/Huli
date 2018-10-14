@@ -7,9 +7,13 @@
 #include "AddressBar.h"
 #include "iconProvider.h"
 
-PopupObject::PopupObject(AddressBarInput* editor): QObject(editor), editor(editor),
-                                                   provider(Settings::getProvider(Settings::getCurrentEngine())) {
-	
+// TODO: Document file better
+
+PopupObject::PopupObject(AddressBarInput* editor)
+	: QObject(editor)
+	, editor(editor)
+	, provider(Settings::getProvider(Settings::getCurrentEngine()))
+{
 	popup = new QTreeWidget;
 	popup->setWindowFlags(Qt::Popup);
 	popup->setFocusPolicy(Qt::NoFocus);

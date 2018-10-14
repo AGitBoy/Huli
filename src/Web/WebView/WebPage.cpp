@@ -1,7 +1,12 @@
 #include "WebPage.h"
 #include "iconProvider.h"
 
-WebPage::WebPage(QWebEngineProfile* profile, QObject* parent): QWebEnginePage(profile, parent) {
+WebPage::WebPage(
+	QWebEngineProfile* profile,
+	QObject* parent
+)
+	: QWebEnginePage(profile, parent)
+{
 	connect(
 		this, &QWebEnginePage::authenticationRequired,
 		this, &WebPage::authenticationRequiredHandler
@@ -18,6 +23,7 @@ WebPage::WebPage(QWebEngineProfile* profile, QObject* parent): QWebEnginePage(pr
 	);
 #endif
 }
+
 
 void WebPage::authenticationRequiredHandler(const QUrl &srcUrl, QAuthenticator* authenticator) {
 	QString labelText(

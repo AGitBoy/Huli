@@ -1,5 +1,6 @@
 #include "DuckDuckGoProvider.h"
 
+
 QVector<suggestion> DuckDuckGoProvider::getSuggestions(QNetworkReply* reply) {
 	QVector<suggestion> suggestionList;
 	
@@ -34,6 +35,7 @@ QVector<suggestion> DuckDuckGoProvider::getSuggestions(QNetworkReply* reply) {
 	}
 	return suggestionList;
 }
+
 
 QUrl DuckDuckGoProvider::getFmtUrl(QString inp) {
 	return QUrl(QString("https://duckduckgo.com/ac/?q=%1").arg(inp));

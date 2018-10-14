@@ -5,9 +5,9 @@
 
 // Pulls suggestions from Google
 class GoogleProvider: public AbstractSuggestionProvider {
-public:
-	QUrl getFmtUrl(QString inp) override;
-	QVector<suggestion> getSuggestions(QNetworkReply* reply) override;
+	public:
+		QUrl getFmtUrl(QString inp) override;
+		QVector<suggestion> getSuggestions(QNetworkReply* reply) override;
 };
 
 

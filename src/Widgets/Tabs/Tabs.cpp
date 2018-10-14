@@ -3,7 +3,12 @@
 #include "Tabs.h"
 #include "WebPage.h"
 
-Tabs::Tabs(QWebEngineProfile* profile): QTabWidget(), myProfile(profile), tabRow(new TabBar(this)) {
+
+Tabs::Tabs(QWebEngineProfile* profile)
+	: QTabWidget()
+	, myProfile(profile)
+	, tabRow(new TabBar(this))
+{
 	setTabBar(tabRow);
 	
 	setElideMode(Qt::ElideRight);
@@ -32,13 +37,16 @@ Tabs::Tabs(QWebEngineProfile* profile): QTabWidget(), myProfile(profile), tabRow
 	previous = newTab(Settings::getHomePage());
 };
 
+
 WebView* Tabs::getWebViewFromSender(QObject* senderObj) {
 	return dynamic_cast<WebView*>(senderObj);
 }
 
+
 void Tabs::fullScreenRequest(bool on) {
 	hideTabBar(on);
 }
+
 
 WebView* Tabs::newTab(const QString &str) {
 	WebView* view = makeTab(str);
@@ -46,9 +54,11 @@ WebView* Tabs::newTab(const QString &str) {
 	return view;
 };
 
+
 void Tabs::hideTabBar(bool on) {
 	on ? tabBar()->hide() : tabBar()->show();
 }
+
 
 void Tabs::removeTabRequest(int index) {
 	removeTab(index);
@@ -71,9 +81,11 @@ void Tabs::changedHandler(int index) {
 	}
 }
 
+
 WebView* Tabs::getView(int index) {
 	return qobject_cast<ViewContainer*>(widget(index))->view;
 }
+
 
 void Tabs::viewTitleUpdate(QString title) {
 	int index = indexOfWebView(getWebViewFromSender(sender()));
@@ -82,11 +94,13 @@ void Tabs::viewTitleUpdate(QString title) {
 	updateWindowTitle();
 }
 
+
 void Tabs::viewIconUpdate(QIcon icon) {
 	int index = indexOfWebView(getWebViewFromSender(sender()));
 	
 	setTabIcon(index, icon);
 }
+
 
 void Tabs::updateWindowTitle() {
 	QString title = myProfile->isOffTheRecord() ? QString("Huli <%1>").arg(tr("Private Browsing")) : "Huli";
@@ -100,6 +114,7 @@ void Tabs::updateWindowTitle() {
 	
 }
 
+
 int Tabs::indexOfWebView(WebView* w) {
 	for(int i = 0; i < count(); ++i) {
 		if(w == dynamic_cast<ViewContainer*>(widget(i))->view) {
@@ -108,6 +123,7 @@ int Tabs::indexOfWebView(WebView* w) {
 	}
 	return -1;
 }
+
 
 WebView* Tabs::makeTab(QString input) {
 	auto* view(new WebView(myProfile));
@@ -134,6 +150,7 @@ WebView* Tabs::makeTab(QString input) {
 	
 	return view;
 }
+
 
 WebView* Tabs::newBackgroundTab(QString str) {
 	return makeTab(std::move(str));

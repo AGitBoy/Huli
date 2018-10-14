@@ -1,5 +1,6 @@
 #include "AddressBarLayoutLoader.h"
 
+
 QString AddressBarLayoutLoader::getFile() {
 	if(!Settings::loadCustomLayout() ||
 	   QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "huli/toolbar.xml").isEmpty()) {
@@ -7,6 +8,7 @@ QString AddressBarLayoutLoader::getFile() {
 	}
 	return QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "huli/toolbar.xml");
 }
+
 
 QVector<layoutItems> AddressBarLayoutLoader::getLayout() {
 	QFile* file = new QFile(getFile());

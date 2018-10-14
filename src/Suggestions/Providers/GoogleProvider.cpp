@@ -1,6 +1,7 @@
 #include "GoogleProvider.h"
 #include "suggestion.h"
 
+
 QVector<suggestion> GoogleProvider::getSuggestions(QNetworkReply* reply) {
 	QVector<suggestion> suggestionList;
 	
@@ -23,6 +24,7 @@ QVector<suggestion> GoogleProvider::getSuggestions(QNetworkReply* reply) {
 	
 	return suggestionList;
 }
+
 
 QUrl GoogleProvider::getFmtUrl(QString inp) {
 	return QString("http://google.com/complete/search?output=toolbar&q=%1").arg(inp);

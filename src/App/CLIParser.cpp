@@ -1,5 +1,6 @@
 #include "CLIParser.h"
 
+
 QCommandLineParser* CLIParser::newParser() {
 	auto* parser = new QCommandLineParser();
 	
@@ -28,6 +29,7 @@ QCommandLineParser* CLIParser::newParser() {
 	
 	return parser;
 }
+
 
 Window* CLIParser::windowFromArgs(QCommandLineParser* parser) {
 	const QStringList args = parser->positionalArguments();

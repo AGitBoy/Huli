@@ -1,7 +1,13 @@
 #include "WebView.h"
 #include "Window.h"
 
-WebView::WebView(QWebEngineProfile* profile): BrowserBase(profile) { }
+
+WebView::WebView(QWebEngineProfile* profile)
+	: BrowserBase(profile)
+{
+
+}
+
 
 QWebEngineView* WebView::newTab() {
 	Window* mainWindow = qobject_cast<Window*>(window()); // NOLINT
@@ -10,6 +16,7 @@ QWebEngineView* WebView::newTab() {
 	}
 	return mainWindow->tabs->newTab();
 }
+
 
 QWebEngineView* WebView::newBackgroundTab() {
 	Window* mainWindow = qobject_cast<Window*>(window()); // NOLINT
@@ -21,6 +28,7 @@ QWebEngineView* WebView::newBackgroundTab() {
 
 	return tab;
 }
+
 
 void WebView::contextMenuEvent(QContextMenuEvent* event) {
 	QMenu* menu = page()->createStandardContextMenu();

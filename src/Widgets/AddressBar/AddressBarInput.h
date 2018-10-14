@@ -8,20 +8,21 @@
 
 class AddressBar;
 
+
 class AddressBarInput: public QLineEdit {
-Q_OBJECT;
+	Q_OBJECT;
 
-public:
-	explicit AddressBarInput(AddressBar* parent);
-	
-	PopupObject popup;
-	AddressBar* bar;
-	
-public slots:
-	void searchAction(QString text) { emit search(std::move(text)); }
+	public:
+		explicit AddressBarInput(AddressBar* parent);
+		
+		PopupObject popup;
+		AddressBar* bar;
+		
+	public slots:
+		void searchAction(QString text) { emit search(std::move(text)); }
 
-signals:
-	void search(QString text);
+	signals:
+		void search(QString text);
 };
 
 #endif

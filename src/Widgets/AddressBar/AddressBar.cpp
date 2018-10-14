@@ -6,8 +6,12 @@
 #include "iconProvider.h"
 #include "AddressBarLayoutLoader.h"
 
+
 AddressBar::AddressBar(ViewContainer* container)
-	: QWidget(), HBox(new QHBoxLayout()), view(container) {
+	: QWidget()
+	, HBox(new QHBoxLayout())
+	, view(container)
+{
 	setMaximumHeight(200);
 	WebView* webView = container->view;
 	
@@ -101,10 +105,8 @@ AddressBar::AddressBar(ViewContainer* container)
 	);
 
 	setLayout(HBox);
-};
+};;
 
-void AddressBar::urlChange(QUrl url) {
-};
 
 void AddressBar::hider(bool on) {
 	if(on) {
@@ -114,10 +116,12 @@ void AddressBar::hider(bool on) {
 	}
 }
 
+
 void AddressBar::searchForce(const QString &query) {
 	QString search = Settings::getCurrentEngine()->url;
 	view->view->load(search.arg(query));
 }
+
 
 void AddressBar::searchFromInput(const QString &query) {
 	QString search = Settings::getCurrentEngine()->url;

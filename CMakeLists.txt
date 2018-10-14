@@ -57,8 +57,6 @@ add_executable(
 	src/Suggestions/AbstactSuggestionProvider.h
 	src/Suggestions/Providers/GoogleProvider.cpp
 	src/Suggestions/Providers/GoogleProvider.h
-	src/Util/urlValidation.h
-	src/Util/urlValidation.cpp
 	src/Web/Popups/PopupWindow.cpp
 	src/Web/Popups/PopupWindow.h
 	src/Suggestions/Providers/DuckDuckGoProvider.cpp
@@ -71,12 +69,17 @@ add_executable(
 	src/Web/Downloads/DownloadManager.h
 	src/Web/Downloads/DownloadItem.cpp
 	src/Web/Downloads/DownloadItem.h
-	src/Util/getFilenameFromPath.h
-	src/Util/getFilenameFromPath.cpp
 	src/Widgets/Tabs/TabBar.cpp
 	src/Widgets/Tabs/TabBar.h
+
+	# TODO: Merge these into a util.h file
+	src/Util/urlValidation.h
+	src/Util/urlValidation.cpp
+	src/Util/getFilenameFromPath.h
+	src/Util/getFilenameFromPath.cpp
 	src/Util/fontUtils.cpp
 	src/Util/fontUtils.h
+
 	src/App/Settings.cpp
 	src/App/Settings.h
 	src/Web/SearchEngine.cpp

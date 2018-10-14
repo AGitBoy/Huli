@@ -2,6 +2,7 @@
 #include <QtGlobal>
 #include "globals.h"
 
+
 QMap<QString, SearchEngine*> Settings::getEngines() {
 	QString path;
 	
@@ -53,6 +54,7 @@ QMap<QString, SearchEngine*> Settings::getEngines() {
 	return returnList;
 }
 
+
 SuggestionEnum Settings::getProviderFromString(QString input) {
 	if(input.toLower() == "duckduckgo") {
 		return DuckDuckGo;
@@ -61,20 +63,24 @@ SuggestionEnum Settings::getProviderFromString(QString input) {
 	}
 }
 
+
 SearchEngine* Settings::getCurrentEngine() {
 	GET_SETTINGS
 	return getEngines().value(settings.value("browser/searchEngine", "DuckDuckGo").toString());
 }
+
 
 QString Settings::getHomePage() {
 	GET_SETTINGS
 	return settings.value("browser/homepage", "https://start.duckduckgo.com").toString();
 }
 
+
 QString Settings::getNewTabPage() {
 	GET_SETTINGS
 	return settings.value("browser/newtab", "https://start.duckduckgo.com").toString();
 }
+
 
 AbstractSuggestionProvider* Settings::getProvider(SearchEngine* engine) {
 	switch(engine->provider) {
@@ -87,10 +93,12 @@ AbstractSuggestionProvider* Settings::getProvider(SearchEngine* engine) {
 	}
 }
 
+
 int Settings::getSuggestionTruncateLength() {
 	GET_SETTINGS
 	return settings.value("suggestions/truncate", 5).toInt();
 }
+
 
 bool Settings::iconsFromDesktop() {
 	GET_SETTINGS
@@ -102,10 +110,12 @@ bool Settings::iconsFromDesktop() {
 	#endif
 }
 
+
 bool Settings::loadCustomLayout() {
 	GET_SETTINGS
 	return settings.value("ui/loadlayout", true).toBool();
 }
+
 
 bool Settings::loadCustomEngines() {
 	GET_SETTINGS

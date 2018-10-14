@@ -2,7 +2,9 @@
 #include "PopupWindow.h"
 #include "Window.h"
 
-BrowserBase::BrowserBase(QWebEngineProfile* profile): QWebEngineView() {
+BrowserBase::BrowserBase(QWebEngineProfile* profile)
+	: QWebEngineView()
+{
 	auto webPage = new WebPage(profile, this);
 	setPage(webPage);
 	
@@ -79,6 +81,7 @@ void BrowserBase::fullScreenRequest(QWebEngineFullScreenRequest request) {
 	request.accept();
 }
 
+
 void BrowserBase::renderProcessQuit(QWebEnginePage::RenderProcessTerminationStatus terminationStatus, int statusCode) {
 	QString statusMessage;
 	switch(terminationStatus) {
@@ -110,6 +113,7 @@ void BrowserBase::renderProcessQuit(QWebEnginePage::RenderProcessTerminationStat
 	}
 }
 
+
 #if QT_11_SUPPORT
 void BrowserBase::openDevTools() {
 	auto devToolsWindow = new QWebEngineView(); // TODO: Replace with subclass of BrowserBase
@@ -120,10 +124,12 @@ void BrowserBase::openDevTools() {
 }
 #endif
 
+
 QWebEngineView* BrowserBase::newPopup() {
 	auto dialog = new PopupWindow(page()->profile());
 	return dialog->view;
 }
+
 
 QWebEngineView* BrowserBase::newWindow() {
 	auto newWindow = new Window();

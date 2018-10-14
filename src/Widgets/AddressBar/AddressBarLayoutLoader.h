@@ -4,6 +4,7 @@
 #include <QtCore>
 #include "Settings.h"
 
+
 enum layoutItems {
 	Back,
 	Forward,
@@ -12,10 +13,11 @@ enum layoutItems {
 	Downloads
 };
 
+
 class AddressBarLayoutLoader {
-public:
-	static QString getFile();
-	static QVector<layoutItems> getLayout();
+	public:
+		static QString getFile();
+		static QVector<layoutItems> getLayout();
 };
 
 

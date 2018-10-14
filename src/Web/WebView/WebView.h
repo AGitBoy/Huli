@@ -8,17 +8,17 @@
 
 // Main Web Browser Tabs
 class WebView: public BrowserBase {
-Q_OBJECT;
+	Q_OBJECT;
 
-public:
-	explicit WebView(QWebEngineProfile* profile);
+	public:
+		explicit WebView(QWebEngineProfile* profile);
 
-public slots:
-	void contextMenuEvent(QContextMenuEvent* event) override;
+	public slots:
+		void contextMenuEvent(QContextMenuEvent* event) override;
 
-private:
-	QWebEngineView* newTab() override;
-	QWebEngineView* newBackgroundTab() override;
+	private:
+		QWebEngineView* newTab() override;
+		QWebEngineView* newBackgroundTab() override;
 };
 
 #endif

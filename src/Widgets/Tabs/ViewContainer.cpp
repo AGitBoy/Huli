@@ -1,6 +1,11 @@
 #include "ViewContainer.h"
 
-ViewContainer::ViewContainer(WebView* view): QWidget(), view(view), bar(new AddressBar(this)) {
+
+ViewContainer::ViewContainer(WebView* view)
+	: QWidget()
+	, view(view)
+	, bar(new AddressBar(this))
+{
 	VBox.addWidget(bar);
 	VBox.addWidget(view);
 	

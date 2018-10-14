@@ -1,9 +1,11 @@
 #include "Window.h"
 
+
 Window::Window(): QMainWindow() {
 	tabs = new Tabs();
 	setCentralWidget(tabs);
 }
+
 
 Window::Window(const QString &link, bool isPrivate, bool search, bool deduce): QMainWindow() {
 	tabs = isPrivate ? new Tabs(new QWebEngineProfile()) : new Tabs;

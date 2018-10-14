@@ -3,6 +3,8 @@
 
 #include <QtWidgets>
 
+
+// TODO: Cleanup this code, because it looks like I vomited strings
 class iconProvider { // Convert into namespace?
 public:
 	// Prefer symbolic icons, for greater compatibility with Ubuntu's new icon theme "Suru"

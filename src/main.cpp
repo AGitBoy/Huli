@@ -3,6 +3,7 @@
 #include "CLIParser.h"
 #include "iconProvider.h"
 
+
 int main(int argc, char* argv[]) {
 	QApplication app(argc, argv);
 	
