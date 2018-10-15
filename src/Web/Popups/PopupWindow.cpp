@@ -53,7 +53,7 @@ void PopupWindow::fullScreenRequest(bool on) {
 		// Hides urlBar
 		urlBar->hide();
 		showFullScreen();
-		// todo: add fullscreen notification
+		// TODO: add fullscreen notification
 	} else {
 		// Returns to normal
 		urlBar->show();
