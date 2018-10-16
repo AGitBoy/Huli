@@ -9,33 +9,33 @@ class WebPage: public QWebEnginePage {
 Q_OBJECT;
 
 public:
-	explicit WebPage(QWebEngineProfile* profile, QObject* parent = nullptr);
+    explicit WebPage(QWebEngineProfile* profile, QObject* parent = nullptr);
 
 public slots:
-	void authenticationRequiredHandler(const QUrl &srcUrl, QAuthenticator* authenticator);
-	
-	void authenticationRequiredProxyHandler(
-		const QUrl &srcUrl,
-		QAuthenticator* authenticator,
-		const QString &proxyHost
-	);
+    void authenticationRequiredHandler(const QUrl &srcUrl, QAuthenticator* authenticator);
+    
+    void authenticationRequiredProxyHandler(
+        const QUrl &srcUrl,
+        QAuthenticator* authenticator,
+        const QString &proxyHost
+    );
 
-	#if QT_11_SUPPORT
-		void registerProtocolHandler(QWebEngineRegisterProtocolHandlerRequest request);
-	#endif
+    #if QT_11_SUPPORT
+        void registerProtocolHandler(QWebEngineRegisterProtocolHandlerRequest request);
+    #endif
 
 private:
-	void makeDialog(QAuthenticator* authenticator, const QString &labelText);
-	
+    void makeDialog(QAuthenticator* authenticator, const QString &labelText);
+    
 protected slots:
-	QStringList chooseFiles(
-		QWebEnginePage::FileSelectionMode mode,
-		const QStringList &oldFiles,
-		const QStringList &acceptedMimeTypes
-	) override;
+    QStringList chooseFiles(
+        QWebEnginePage::FileSelectionMode mode,
+        const QStringList &oldFiles,
+        const QStringList &acceptedMimeTypes
+    ) override;
 
 protected:
-	bool certificateError(const QWebEngineCertificateError &error) override;
+    bool certificateError(const QWebEngineCertificateError &error) override;
 };
 
 #endif //HULI_WEBPAGE_H

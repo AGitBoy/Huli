@@ -7,14 +7,14 @@
 class WebView;
 
 class ViewContainer: public QWidget {
-	Q_OBJECT;
+    Q_OBJECT;
 
-	public:
-		explicit ViewContainer(WebView* view);
-		WebView* view;
-		AddressBar* bar;
-		QVBoxLayout VBox;
-		
+    public:
+        explicit ViewContainer(WebView* view);
+        WebView* view;
+        AddressBar* bar;
+        QVBoxLayout VBox;
+        
 };
 
 #endif

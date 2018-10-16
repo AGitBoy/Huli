@@ -7,14 +7,14 @@
 
 
 class SearchEngine: public QObject {
-	Q_OBJECT;
+    Q_OBJECT;
 
-	public:
-		SearchEngine(QString Name, QString Url, SuggestionEnum Provider);
-		QString name;
-		QString url;
-		SuggestionEnum provider;
-		
+    public:
+        SearchEngine(QString Name, QString Url, SuggestionEnum Provider);
+        QString name;
+        QString url;
+        SuggestionEnum provider;
+        
 };
 
 

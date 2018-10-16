@@ -6,20 +6,20 @@
 #include "PopupWebView.h"
 
 class PopupWindow: public QWidget {
-Q_OBJECT;
+    Q_OBJECT;
 
-public:
-	explicit PopupWindow(QWebEngineProfile* profile);
-	
-	PopupWebView* view;
-	QAction* favicon;
+    public:
+        explicit PopupWindow(QWebEngineProfile* profile);
+        
+        PopupWebView* view;
+        QAction* favicon;
 
-private:
-	QLineEdit* urlBar;
+    private:
+        QLineEdit* urlBar;
 
-private slots:
-	void handleGeometryChangeRequested(const QRect &newGeometry);
-	void fullScreenRequest(bool on);
+    private slots:
+        void handleGeometryChangeRequested(const QRect &newGeometry);
+        void fullScreenRequest(bool on);
 };
 
 

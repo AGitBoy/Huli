@@ -3,8 +3,8 @@
 
 // Enum that is used to signify which suggestion backend to use with a search engine
 enum SuggestionEnum {
-	DuckDuckGo,
-	Google
+    DuckDuckGo,
+    Google
 };
 
 #endif //HULI_SUGGESTIONENUM_H

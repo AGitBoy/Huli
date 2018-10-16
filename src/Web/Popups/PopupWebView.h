@@ -6,15 +6,14 @@
 #include "BrowserBase.h"
 
 class PopupWebView: public BrowserBase {
-	
-	Q_OBJECT;
+    Q_OBJECT;
 
-public:
-	explicit PopupWebView(QWebEngineProfile* profile);
+    public:
+        explicit PopupWebView(QWebEngineProfile* profile);
 
-private:
-	QWebEngineView* newTab() override;
-	QWebEngineView* newBackgroundTab() override;
+    private:
+        QWebEngineView* newTab() override;
+        QWebEngineView* newBackgroundTab() override;
 };
 
 

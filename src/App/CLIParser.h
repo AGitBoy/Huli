@@ -9,8 +9,8 @@
 
 // namespace holding various command line argument processing actions
 namespace CLIParser {
-	QCommandLineParser* newParser(); // Generates a QCommandLineParser object
-	Window* windowFromArgs(QCommandLineParser* parser); // Creates a window from the arguments passed
+    QCommandLineParser* newParser(); // Generates a QCommandLineParser object
+    Window* windowFromArgs(QCommandLineParser* parser); // Creates a window from the arguments passed
 };
 
 

@@ -6,18 +6,18 @@
 
 
 enum layoutItems {
-	Back,
-	Forward,
-	Reload,
-	UrlBar,
-	Downloads
+    Back,
+    Forward,
+    Reload,
+    UrlBar,
+    Downloads
 };
 
 
 class AddressBarLayoutLoader {
-	public:
-		static QString getFile();
-		static QVector<layoutItems> getLayout();
+    public:
+        static QString getFile();
+        static QVector<layoutItems> getLayout();
 };
 
 

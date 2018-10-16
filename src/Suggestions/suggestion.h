@@ -5,9 +5,9 @@
 #include "iconProvider.h"
 
 struct suggestion {
-	QString text; // Main text of suggestion
-	QString snippet = "Search"; // Snippet for display
-	QIcon icon = iconProvider::getSearchIcon(); // Icon to display
+    QString text; // Main text of suggestion
+    QString snippet = "Search"; // Snippet for display
+    QIcon icon = iconProvider::getSearchIcon(); // Icon to display
 };
 
 
