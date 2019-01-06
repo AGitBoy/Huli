@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+__printerr() {
+    echo "\033[0;1;31m"
+    echo "$@"
+    echo "\033[0;39m"
+    exit 1
+}
+
 prev_dir="$(pwd)"
 script_dir="$(dirname $(realpath $0))"
 
@@ -18,14 +25,11 @@ buildSuccess=0
 cmake -DENABLE_X11_ICONS=OFF --target huli -- j 2 "$src_dir"
 
 if [[ ! $? = 0 ]]; then
-    echo "CMake Configuration Failed"
-    exit 1
+    __printerr "CMake Configuration Failed"
 else
-    makeSuccess=0
     make
     if [[ ! $? = 0 ]]; then
-        echo "Make Failed"
-        exit 1
+        __printerr "Make failed"
     fi
 fi
 
@@ -45,7 +49,7 @@ chmod +x tools/linuxdeployqt-continuous-x86_64.AppImage
 
 if [[ -d AppDir ]]; then
     rm -rf AppDir
-fi;
+fi
 
 cp -r dirSrc AppDir
 
@@ -54,8 +58,7 @@ if [[ -f build/huli ]]; then
     cp ${img_dir}/build/huli huli
     cd ${img_dir}
 else
-    echo "Executable not found in build directory"
-    exit 1
+    __printerr "Executable not found in build directory"
 fi;
 
 # Fix for https://github.com/probonopd/linuxdeployqt/issues/35
