@@ -1,24 +1,29 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+prev_dir="$(pwd)"
+script_dir="$(dirname $(realpath $0))"
+
+cd "${script_dir}"
 
 src_dir="$(realpath ../../../)"
 img_dir="$(pwd)"
 
-if [ -d build ]; then
+if [[ -d build ]]; then
     rm -rf build
 fi
 
 mkdir build && cd build
 buildSuccess=0
 
-cmake -DENABLE_X11_ICONS=OFF --target huli -- j 2 "$src_dir" || buildSuccess=1
+cmake -DENABLE_X11_ICONS=OFF --target huli -- j 2 "$src_dir"
 
-if [ ! ${buildSuccess} = 0 ]; then
+if [[ ! $? = 0 ]]; then
     echo "CMake Configuration Failed"
     exit 1
 else
     makeSuccess=0
-    make || makeSuccess=1
-    if [ ! ${makeSuccess} = 0 ]; then
+    make
+    if [[ ! $? = 0 ]]; then
         echo "Make Failed"
         exit 1
     fi
@@ -26,7 +31,7 @@ fi
 
 cd ../
 
-if [ ! -d tools ]; then
+if [[ ! -d tools ]]; then
     mkdir tools
 fi
 
@@ -38,13 +43,13 @@ fi
 
 chmod +x tools/linuxdeployqt-continuous-x86_64.AppImage
 
-if [ -d AppDir ]; then
+if [[ -d AppDir ]]; then
     rm -rf AppDir
 fi;
 
 cp -r dirSrc AppDir
 
-if [ -f build/huli ]; then
+if [[ -f build/huli ]]; then
     cd ${img_dir}/AppDir/usr/bin
     cp ${img_dir}/build/huli huli
     cd ${img_dir}
@@ -60,6 +65,15 @@ if python -mplatform | grep -qi Ubuntu; then
     excluded='-exclude-libs="libnss3.so,libnssutil3.so"'
 fi
 
-export ARCH="x86_64"
+_arch = "x86_64"
 
-ARCH=x86_64 ${img_dir}/tools/linuxdeployqt-continuous-x86_64.AppImage ${img_dir}/AppDir/usr/share/applications/huli.desktop -appimage "$excluded"
+if [[ "$(uname -s)" = "Linux" ]]; then
+    _arch = "$(uname -p)"
+fi
+
+ARCH=${ARCH:-$_arch}
+export ARCH
+
+${img_dir}/tools/linuxdeployqt-continuous-x86_64.AppImage ${img_dir}/AppDir/usr/share/applications/huli.desktop -appimage "$excluded"
+
+cd "${prev_dir}"
