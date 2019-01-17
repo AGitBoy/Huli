@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.10)
 project(Huli)
 set(CMAKE_CXX_STANDARD 11)
 
+# Completions for vim and vscode
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 ############## REQUIRED FOR QT5 TO WORK ################
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -93,7 +96,8 @@ add_executable(
     src/Util/iconProvider.cpp
     src/Widgets/AddressBar/AddressBarLayoutLoader.cpp
     src/Widgets/AddressBar/AddressBarLayoutLoader.h
-    src/globals.h)
+    src/globals.h
+)
 
 
 ########### REQUIRED FOR QT5 TO WORK ############
@@ -124,4 +128,5 @@ else()
     set(QT_10_SUPPORT 1)
 endif()
 
-configure_file(config.h.in config.h)
+configure_file(config.h.in src/config.h)
+
