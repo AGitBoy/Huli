@@ -1,3 +1,5 @@
+# [THIS PROJECT HAS BEEN MIGRATED TO GITLAB](https://gitlab.com/AGitBoy/Huli)
+
 # Huli
 A QT5 based web browser, 
 which aims to have feature completeness for all platforms.
